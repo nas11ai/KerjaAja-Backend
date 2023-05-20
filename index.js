@@ -4,8 +4,14 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const path = require('path');
 
+const {
+  loginRouter,
+  registerRouter,
+} = require("./user-features/controller");
+
 const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
+const { errorHandler } = require('./middlewares');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -14,6 +20,9 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("KerjaAja API is running 🥳");
 })
+
+app.use('/users/login', loginRouter);
+app.use('/users/register', registerRouter);
 
 app.use('/static', express.static(path.join(__dirname, 'assets')));
 
@@ -25,3 +34,5 @@ const main = async () => {
 }
 
 main();
+
+app.use(errorHandler);

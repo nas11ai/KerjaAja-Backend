@@ -69,21 +69,11 @@ module.exports = {
       },
       photo_path: {
         type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: 'Please enter user\'s photo filepath',
-          },
-        },
+        allowNull: true,
       },
       photo_url: {
         type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: 'Please enter user\'s photo url',
-          },
-        },
+        allowNull: true,
       },
       created_at: {
         type: DataTypes.DATE,
