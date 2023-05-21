@@ -15,6 +15,7 @@ const {
 
 const {
   createNewUserRecommendationRouter,
+  readExistingUserRecommendationRouter,
   updateExistingUserRecommendationRouter,
   deleteExistingUserRecommendationRouter,
 } = require('./user-recommendation-features/controller');
@@ -41,6 +42,7 @@ app.use('/users/verify_password', verifyUserPasswordRouter);
 app.use('/users/profile_photo', updateUserPhotoRouter);
 
 app.use('/user_recommendations/create', createNewUserRecommendationRouter);
+app.use('/user_recommendations/read', readExistingUserRecommendationRouter);
 app.use('/user_recommendations/update', updateExistingUserRecommendationRouter);
 app.use('/user_recommendations/delete', deleteExistingUserRecommendationRouter);
 

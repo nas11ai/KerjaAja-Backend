@@ -2,6 +2,8 @@ const { Model, DataTypes } = require('sequelize');
 
 const { sequelize } = require('../../utilities/db');
 
+const { User } = require('../../user-features/model');
+
 class UserRecommendation extends Model { }
 
 UserRecommendation.init({
@@ -72,6 +74,25 @@ UserRecommendation.init({
       fields: ['sender_id', 'receiver_id'],
     },
   ],
+});
+
+User.hasMany(UserRecommendation, {
+  onUpdate: "CASCADE",
+  onDelete: "CASCADE",
+});
+
+UserRecommendation.belongsTo(User, {
+  foreignKey: 'sender_id',
+  as: 'sender',
+  onUpdate: 'CASCADE',
+  onDelete: 'CASCADE',
+});
+
+UserRecommendation.belongsTo(User, {
+  foreignKey: 'receiver_id',
+  as: 'receiver',
+  onUpdate: 'CASCADE',
+  onDelete: 'CASCADE',
 });
 
 module.exports = { UserRecommendation };

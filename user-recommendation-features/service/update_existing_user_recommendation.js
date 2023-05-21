@@ -13,25 +13,27 @@ const updateExistingUserRecommendation = async (req) => {
     throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
   }
 
-  const { id: receiver_id } = await User.findOne({ where: { username: req.query.receiver_username } });
+  let user = await User.findOne({ where: { username: req.query.receiver_username } });
 
-  if (!receiver_id) {
-    if (!receiver_id) {
-      const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");
-      // TODO: ganti console ke log kalau sudah mau production
-      console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
-    }
+  if (!user) {
+    const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
   }
 
-  const { id: sender_id } = await User.findOne({ where: { username: req.params.sender_username } });
+  const { id: receiver_id } = user;
 
-  if (!sender_id) {
+  user = await User.findOne({ where: { username: req.params.sender_username } });
+
+  if (!user) {
     const err = new ErrorDetails("UserRecommendationError", "sender_username", "sender_username not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
     throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
   }
+
+  const { id: sender_id } = user;
 
   const userRecommendation = await UserRecommendation.findOne({
     where: { sender_id, receiver_id },
