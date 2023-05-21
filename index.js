@@ -8,6 +8,7 @@ const {
   loginRouter,
   registerRouter,
   updateUserPhotoRouter,
+  changeUserPasswordRouter,
 } = require("./user-features/controller");
 
 const { PORT } = require("./utilities/config");
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 
 app.use('/users/login', loginRouter);
 app.use('/users/register', registerRouter);
+app.use('/users/change_password', changeUserPasswordRouter);
 app.use('/users/profile_photo', updateUserPhotoRouter);
 
 app.use('/static', express.static(path.join(__dirname, 'assets')));
