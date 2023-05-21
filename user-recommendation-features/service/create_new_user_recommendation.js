@@ -29,7 +29,7 @@ const createNewUserRecommendation = async (req) => {
     throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
   }
 
-  const { id: receiver_id } = await User.findOne({ where: { username: sender_username } });
+  const { id: receiver_id } = await User.findOne({ where: { username: receiver_username } });
 
   if (!receiver_id) {
     const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");

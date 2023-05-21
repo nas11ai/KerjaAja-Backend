@@ -1,3 +1,4 @@
 const createNewUserRecommendationRouter = require("./create");
+const updateExistingUserRecommendationRouter = require("./update");
 
-module.exports = { createNewUserRecommendationRouter };
+module.exports = { createNewUserRecommendationRouter, updateExistingUserRecommendationRouter };
