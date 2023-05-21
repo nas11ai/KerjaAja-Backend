@@ -11,12 +11,12 @@ UserRecommendation.init({
     primaryKey: true,
     unique: {
       args: true,
-      msg: 'User ID has been taken',
+      msg: 'User Recommendation ID has been taken',
     },
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'User ID can\'t be empty',
+        msg: 'User Recommendation ID can\'t be empty',
       },
     },
   },
