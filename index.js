@@ -13,6 +13,10 @@ const {
   verifyUserPasswordRouter,
 } = require("./user-features/controller");
 
+const {
+  createNewUserRecommendationRouter,
+} = require('./user-recommendation-features/controller');
+
 const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
 const { errorHandler } = require('./middlewares');
@@ -25,6 +29,8 @@ app.get("/", (req, res) => {
   res.send("KerjaAja API is running 🥳");
 })
 
+app.use('/static', express.static(path.join(__dirname, 'assets')));
+
 app.use('/users/login', loginRouter);
 app.use('/users/register', registerRouter);
 app.use('/users/change_username', changeUserUsernameRouter);
@@ -32,7 +38,7 @@ app.use('/users/change_password', changeUserPasswordRouter);
 app.use('/users/verify_password', verifyUserPasswordRouter);
 app.use('/users/profile_photo', updateUserPhotoRouter);
 
-app.use('/static', express.static(path.join(__dirname, 'assets')));
+app.use('/user_recommendations/create', createNewUserRecommendationRouter);
 
 const main = async () => {
   await connectToDatabase();

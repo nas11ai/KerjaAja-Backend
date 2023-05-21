@@ -74,4 +74,4 @@ UserRecommendation.init({
   ],
 });
 
-module.exports = UserRecommendation;
+module.exports = { UserRecommendation };
