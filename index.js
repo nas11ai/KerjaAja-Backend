@@ -16,6 +16,7 @@ const {
 const {
   createNewUserRecommendationRouter,
   updateExistingUserRecommendationRouter,
+  deleteExistingUserRecommendationRouter,
 } = require('./user-recommendation-features/controller');
 
 const { PORT } = require("./utilities/config");
@@ -41,6 +42,7 @@ app.use('/users/profile_photo', updateUserPhotoRouter);
 
 app.use('/user_recommendations/create', createNewUserRecommendationRouter);
 app.use('/user_recommendations/update', updateExistingUserRecommendationRouter);
+app.use('/user_recommendations/delete', deleteExistingUserRecommendationRouter);
 
 const main = async () => {
   await connectToDatabase();
