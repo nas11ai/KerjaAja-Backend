@@ -10,6 +10,7 @@ const {
   updateUserPhotoRouter,
   changeUserUsernameRouter,
   changeUserPasswordRouter,
+  verifyUserPasswordRouter,
 } = require("./user-features/controller");
 
 const { PORT } = require("./utilities/config");
@@ -28,6 +29,7 @@ app.use('/users/login', loginRouter);
 app.use('/users/register', registerRouter);
 app.use('/users/change_username', changeUserUsernameRouter);
 app.use('/users/change_password', changeUserPasswordRouter);
+app.use('/users/verify_password', verifyUserPasswordRouter);
 app.use('/users/profile_photo', updateUserPhotoRouter);
 
 app.use('/static', express.static(path.join(__dirname, 'assets')));
