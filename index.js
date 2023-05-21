@@ -8,6 +8,7 @@ const {
   loginRouter,
   registerRouter,
   updateUserPhotoRouter,
+  changeUserUsernameRouter,
   changeUserPasswordRouter,
 } = require("./user-features/controller");
 
@@ -15,7 +16,7 @@ const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
 const { errorHandler } = require('./middlewares');
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use('/users/login', loginRouter);
 app.use('/users/register', registerRouter);
+app.use('/users/change_username', changeUserUsernameRouter);
 app.use('/users/change_password', changeUserPasswordRouter);
 app.use('/users/profile_photo', updateUserPhotoRouter);
 
