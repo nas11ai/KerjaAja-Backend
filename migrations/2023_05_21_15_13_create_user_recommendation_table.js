@@ -69,6 +69,10 @@ module.exports = {
           customIndex: true,
           fields: ["id"],
         },
+        unique_sender_receiver: {
+          customIndex: true,
+          fields: ["sender_id", "receiver_id"],
+        },
       },
     });
   },

@@ -67,6 +67,10 @@ UserRecommendation.init({
       unique: true,
       fields: ["id"],
     },
+    {
+      unique: 'unique_sender_receiver',
+      fields: ['sender_id', 'receiver_id'],
+    },
   ],
 });
 
