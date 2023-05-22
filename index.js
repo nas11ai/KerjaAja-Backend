@@ -7,6 +7,7 @@ const path = require('path');
 const {
   loginRouter,
   registerRouter,
+  readExistingUserRouter,
   updateUserPhotoRouter,
   changeUserUsernameRouter,
   changeUserPasswordRouter,
@@ -36,6 +37,7 @@ app.use('/static', express.static(path.join(__dirname, 'assets')));
 
 app.use('/users/login', loginRouter);
 app.use('/users/register', registerRouter);
+app.use('/users/read', readExistingUserRouter);
 app.use('/users/change_username', changeUserUsernameRouter);
 app.use('/users/change_password', changeUserPasswordRouter);
 app.use('/users/verify_password', verifyUserPasswordRouter);
