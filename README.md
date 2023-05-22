@@ -43,9 +43,15 @@ Register a new user.
   - **Content**:
     ```json
     {
-      "message": "CREATED",
+      "code": 201,
+      "status": "CREATED",
       "data": {
-        "users": null
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -148,12 +154,18 @@ Authenticate a user and generate access token.
   - **Content**:
     ```json
     {
-      "message": "OK",
+      "code": 200,
+      "status": "OK",
       "data": {
-        "bearer_token": {
+        "type": "bearer_token",
+        "attribute": {
           "user_role": "user",
           "access_token": "generated_access_token"
         }
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -222,25 +234,38 @@ Retrieve existing users based on the provided query parameters.
   - **Content**:
     ```json
     {
-      "message": "OK",
+      "code": 200,
+      "status": "OK",
       "data": {
-        "users": {
+        "type": "users",
+        "attributes": {
           "current_page": 1,
-          "data_count_on_current_page": 5,
-          "total_data_count": 10,
-          "total_pages": 2,
+          "data_count_on_current_page": 2,
+          "total_data_count": 2,
+          "total_pages": 1,
           "records": [
             {
-              "username": "john_doe",
-              "fullname": "John Doe",
+              "username": "root",
+              "fullname": "Capstone Admin",
               "gender": "male",
-              "photo_url": "https://example.com/photo.jpg",
-              "created_at": "2023-05-21T10:00:00Z",
-              "updated_at": "2023-05-21T10:30:00Z"
+              "photo_url": "static/user_profile_photo/root/root_2023-05-21-11-47-57_ayaya.jpg",
+              "created_at": "2023-05-20T15:21:14.000Z",
+              "updated_at": "2023-05-22T10:08:25.000Z"
             },
-            ...
+            {
+              "username": "female_root",
+              "fullname": "Female Capstone Admin",
+              "gender": "female",
+              "photo_url": null,
+              "created_at": "2023-05-21T12:38:38.000Z",
+              "updated_at": "2023-05-21T12:38:38.000Z"
+            }
           ]
         }
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -308,9 +333,15 @@ Update the photo of a user.
   - **Content**:
     ```json
     {
-      "message": "NO_CONTENT",
+      "code": 204,
+      "status": "NO_CONTENT",
       "data": {
-        "user_photos": null
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -386,9 +417,15 @@ Change the password of a user.
   - **Content**:
     ```json
     {
-      "message": "NO_CONTENT",
+      "code": 204,
+      "status": "NO_CONTENT",
       "data": {
-        "change_user_password": null
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -469,9 +506,15 @@ Change the username of a user.
   - **Content**:
     ```json
     {
-      "message": "NO_CONTENT",
+      "code": 204,
+      "status": "NO_CONTENT",
       "data": {
-        "change_user_username": null
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -553,9 +596,15 @@ Verify if the provided password matches the user's password.
   - **Content**:
     ```json
     {
-      "message": "OK",
+      "code": 200,
+      "status": "OK",
       "data": {
-        "verify_user_password": null
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
       }
     }
     ```
@@ -637,14 +686,17 @@ Create a new user recommendation.
 
 - **Success Response**
 
-  - **Code**: `200 OK`
+  - **Code**: `201 CREATED`
   - **Content-type**: `application/json`
   - **Content**:
     ```json
     {
-      "code": 200,
-      "status": "OK",
-      "data": null,
+      "code": 201,
+      "status": "CREATED",
+      "data": {
+        "type": "user_recommendations",
+        "attribute": null
+      },
       "meta": {
         "version": "<API_VERSION>",
         "timestamp": "<Current Timestamp>"
