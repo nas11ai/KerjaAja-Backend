@@ -1064,11 +1064,85 @@ The request body should be a JSON object with the following properties:
 ### Request Example
 
 - **Content-type**: `application/x-www-form-urlencoded`
-- **URL**: `/user_recommendations/update/john_doe?receiver_username=jane_smith`
+- **URL**: `{{base_url}}/user_recommendations/update/john_doe?receiver_username=jane_smith`
 
 | Field       | Input Example |
 | ----------- | ------------- |
 | rating      | 5             |
 | description | hot           |
+
+---
+
+## Delete Existing User Recommendation
+
+Delete an existing user recommendation.
+
+- **URL**: `/user_recommendations/delete/:sender_username`
+- **Method**: `DELETE`
+
+### Request Parameters
+
+| Parameter                    | Type   | Description                  |
+| ---------------------------- | ------ | ---------------------------- |
+| sender_username              | string | The username of the sender.  |
+| receiver_username (optional) | string | The username of the receiver |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the sender username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username not found"
+          }
+        }
+        ```
+      - When the receiver username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username not found"
+          }
+        }
+        ```
+      - When the user recommendation is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user_recommendation",
+            "message": "user_recommendation not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **DELETE** `{{base_url}}/user_recommendations/delete/john_doe?receiver_username=jane_smith`
 
 ---
