@@ -853,6 +853,7 @@ None.
 - **Success Response**
 
   - **Code**: `200 OK`
+  - **Content-type**: `application/json`
   - **Content**:
     ```json
     {
@@ -890,6 +891,7 @@ None.
 
 - **Error Response**
   - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
     - **Content**:
       - When the `page` parameter is not a number:
         ```json
@@ -933,5 +935,140 @@ None.
 ### Request Example
 
 - **GET** `{{base_url}}/user_recommendations?rating=DESC&receiver_username=jane_smith&page=1&size=10`
+
+---
+
+## Update Existing User Recommendation
+
+Update an existing user recommendation.
+
+- **URL**: `/user_recommendations/update/:sender_username?receiver_username=<insert receiver here>`
+- **Method**: `PUT`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+### Query Parameters
+
+| Parameter         | Type   | Description                                                   |
+| ----------------- | ------ | ------------------------------------------------------------- |
+| receiver_username | string | (Required) The receiver's username who get the recommendation |
+
+### Request Parameters
+
+| Parameter       | Type   | Description                 |
+| --------------- | ------ | --------------------------- |
+| sender_username | string | The username of the sender. |
+
+### Request Body
+
+The request body should be a JSON object with the following properties:
+
+| Property    | Type   | Description                                       |
+| ----------- | ------ | ------------------------------------------------- |
+| rating      | number | The new rating value for the user recommendation. |
+| description | string | The new description for the user recommendation.  |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content-type**: `application/json`
+  - **Content**:
+
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "users",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the `receiver_username` is missing or blank:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username must not be blank"
+          }
+        }
+        ```
+      - When the `rating` and `description` is missing:
+        ```json
+        {
+          "error": {
+            "attribute": "user_recommendation",
+            "message": "rating or description must be available"
+          }
+        }
+        ```
+      - When the `rating` is not a number:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating must be a number"
+          }
+        }
+        ```
+      - When the `rating` is not between 1 and 5:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating must be between 1 and 5"
+          }
+        }
+        ```
+  - **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the receiver username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username not found"
+          }
+        }
+        ```
+      - When the sender username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username not found"
+          }
+        }
+        ```
+      - When the user recommendation is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user_recommendation",
+            "message": "user_recommendation not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **Content-type**: `application/x-www-form-urlencoded`
+- **URL**: `/user_recommendations/update/john_doe?receiver_username=jane_smith`
+
+| Field       | Input Example |
+| ----------- | ------------- |
+| rating      | 5             |
+| description | hot           |
 
 ---
