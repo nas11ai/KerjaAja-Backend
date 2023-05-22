@@ -188,3 +188,80 @@ Authenticate a user and generate access token.
 | -------- | ------------- |
 | username | root          |
 | password | root          |
+
+### Get Existing Users
+
+Retrieve existing users based on the provided query parameters.
+
+- **URL**: `{{base_url}}}/users/read`
+- **Method**: `GET`
+
+#### Query Parameters for Filtering
+
+| Parameter  | Type   | Description                                          |
+| ---------- | ------ | ---------------------------------------------------- |
+| page       | number | Current page number                                  |
+| size       | number | Number of records per page                           |
+| username   | string | Filter users by username (case-sensitive)            |
+| fullname   | string | Filter users by full name (case-insensitive)         |
+| role       | string | Filter users by role (`superadmin`, `admin`, `user`) |
+| gender     | string | Filter users by gender (`male`, `female`)            |
+| created_at | string | Sort users by creation date (`ASC`, `DESC`)          |
+| updated_at | string | Sort users by update date (`ASC`, `DESC`)            |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content**:
+    ```json
+    {
+      "message": "OK",
+      "data": {
+        "users": {
+          "current_page": 1,
+          "data_count_on_current_page": 5,
+          "total_data_count": 10,
+          "total_pages": 2,
+          "records": [
+            {
+              "username": "john_doe",
+              "fullname": "John Doe",
+              "gender": "male",
+              "photo_url": "https://example.com/photo.jpg",
+              "created_at": "2023-05-21T10:00:00Z",
+              "updated_at": "2023-05-21T10:30:00Z"
+            },
+            ...
+          ]
+        }
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+    - **Content**:
+      - When `page` is not an integer:
+        ```json
+        {
+          "error": {
+            "attribute": "pagination",
+            "message": "page must be an integer"
+          }
+        }
+        ```
+      - When `size` is not an integer:
+        ```json
+        {
+          "error": {
+            "attribute": "pagination",
+            "message": "size must be an integer"
+          }
+        }
+        ```
+
+#### Request Example
+
+- **GET** `{{base_url}}/users?page=1&size=5&username=john&role=user&created_at=DESC`
