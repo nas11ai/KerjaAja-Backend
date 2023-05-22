@@ -434,12 +434,90 @@ Change the password of a user.
 - **PUT** `{{base_url}}/users/change_password/john_doe`
 - **Content-type**: `application/x-www-form-urlencoded`
 
-{
-"new_password": "newpassword123"
-}
-
 | Field        | Input Example |
 | ------------ | ------------- |
 | new_password | tes1          |
+
+---
+
+### Change User Username
+
+Change the username of a user.
+
+- **URL**: `/users/change_username/:username`
+- **Method**: `PUT`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+#### Request Parameters
+
+| Parameter | Type   | Description                         |
+| --------- | ------ | ----------------------------------- |
+| username  | string | The username of the user to change. |
+
+#### Request Body
+
+| Field        | Type   | Description                    |
+| ------------ | ------ | ------------------------------ |
+| new_username | string | The new username for the user. |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `204 NO_CONTENT`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "message": "NO_CONTENT",
+      "data": {
+        "change_user_username": null
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the `new_username` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "new_username",
+            "message": "new_username must not be blank"
+          }
+        }
+        ```
+      - When the `new_username` field is not a string:
+        ```json
+        {
+          "error": {
+            "attribute": "new_username",
+            "message": "new_username must be a string"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the user is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user",
+            "message": "user not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT** `{{base_url}}/users/change_username/john_doe`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+| Field        | Input Example |
+| ------------ | ------------- |
+| new_username | toor          |
 
 ---
