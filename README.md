@@ -270,7 +270,7 @@ Retrieve existing users based on the provided query parameters.
 
 ### Request Example
 
-- **GET** `{{base_url}}/users?page=1&size=5&username=john&role=user&created_at=DESC`
+- **GET** `{{base_url}}/users/read?page=1&size=5&username=john&role=user&created_at=DESC`
 
 ---
 
@@ -352,7 +352,94 @@ Update the photo of a user.
 
 ### Request Example
 
-- **PUT** `/users/john_doe?delete=true`
+- **PUT** `/users/profile_photo/john_doe?delete=true`
 - **Content-Type:** `multipart/form-data`
+
+---
+
+### Change User Password
+
+Change the password of a user.
+
+- **URL**: `/users/change_password/:username`
+- **Method**: `PUT`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+#### Request Parameters
+
+| Parameter | Type   | Description                                          |
+| --------- | ------ | ---------------------------------------------------- |
+| username  | string | The username of the user to change the password for. |
+
+#### Request Body
+
+| Field        | Type   | Description                    |
+| ------------ | ------ | ------------------------------ |
+| new_password | string | The new password for the user. |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `204 NO_CONTENT`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "message": "NO_CONTENT",
+      "data": {
+        "change_user_password": null
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the `new_password` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "new_password",
+            "message": "new_password must not be blank"
+          }
+        }
+        ```
+      - When the `new_password` field is not a string:
+        ```json
+        {
+          "error": {
+            "attribute": "new_password",
+            "message": "new_password must be a string"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+    - **Content**:
+      - When the user is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user",
+            "message": "user not found"
+          }
+        }
+        ```
+
+### Request Example
+
+---
+
+- **PUT** `{{base_url}}/users/change_password/john_doe`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+{
+"new_password": "newpassword123"
+}
+
+| Field        | Input Example |
+| ------------ | ------------- |
+| new_password | tes1          |
 
 ---
