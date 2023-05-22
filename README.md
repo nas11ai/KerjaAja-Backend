@@ -852,9 +852,14 @@ Create a new user recommendation.
       - When the `receiver_username` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "receiver_username": "receiver_username must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
