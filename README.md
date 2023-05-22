@@ -20,7 +20,7 @@ This API is made with:
 
 Register a new user.
 
-- **URL**: `/register`
+- **URL**: `/users/register`
 - **Method**: `POST`
 - **Content-type**: `application/x-www-form-urlencoded`
 
@@ -111,7 +111,7 @@ Register a new user.
 
 ### Request Example
 
-- **POST** `{{base_url}}/register`
+- **POST** `{{base_url}}/users/register`
 - **Content-Type:** `application/x-www-form-urlencoded`
 
 | Field    | Input Example  |
@@ -121,3 +121,70 @@ Register a new user.
 | role     | superadmin     |
 | password | root           |
 | gender   | male           |
+
+## User Login
+
+Authenticate a user and generate access token.
+
+- **URL**: `/users/login`
+- **Method**: `POST`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+### Request Body
+
+| Field    | Type   | Description     |
+| -------- | ------ | --------------- |
+| username | string | User's username |
+| password | string | User's password |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "message": "OK",
+      "data": {
+        "bearer_token": {
+          "user_role": "user",
+          "access_token": "generated_access_token"
+        }
+      }
+    }
+    ```
+
+- **Error Responses**
+  - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When `username` is wrong:
+        ```json
+        {
+          "error": {
+            "attribute": "username",
+            "message": "username is wrong"
+          }
+        }
+        ```
+      - When `password` is wrong:
+        ```json
+        {
+          "error": {
+            "attribute": "password",
+            "message": "password is wrong"
+          }
+        }
+        ```
+
+### Request Example
+
+- **POST** `{{base_url}}/users/login`
+- **Content-Type:** `application/x-www-form-urlencoded`
+
+| Field    | Input Example |
+| -------- | ------------- |
+| username | root          |
+| password | root          |
