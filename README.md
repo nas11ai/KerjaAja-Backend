@@ -63,54 +63,84 @@ Register a new user.
       - When `username` is blank:
         ```json
         {
-          "error": {
-            "attribute": "username",
-            "message": "username must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "username": "username must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `username` has been taken:
         ```json
         {
-          "error": {
-            "attribute": "username",
-            "message": "username has been taken"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "username": "username has been taken"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `fullname` is blank:
         ```json
         {
-          "error": {
-            "attribute": "fullname",
-            "message": "fullname must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "fullname": "fullname must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `role` is blank:
         ```json
         {
-          "error": {
-            "attribute": "role",
-            "message": "role must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "role": "role must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `password` is blank:
         ```json
         {
-          "error": {
-            "attribute": "password",
-            "message": "password must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "password": "password must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `gender` is blank:
         ```json
         {
-          "error": {
-            "attribute": "gender",
-            "message": "gender must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "gender": "gender must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -177,18 +207,28 @@ Authenticate a user and generate access token.
       - When `username` is wrong:
         ```json
         {
-          "error": {
-            "attribute": "username",
-            "message": "username is wrong"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "username": "username is wrong"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `password` is wrong:
         ```json
         {
-          "error": {
-            "attribute": "password",
-            "message": "password is wrong"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "password": "password is wrong"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -277,18 +317,28 @@ Retrieve existing users based on the provided query parameters.
       - When `page` is not an integer:
         ```json
         {
-          "error": {
-            "attribute": "pagination",
-            "message": "page must be an integer"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "page": "page must be integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When `size` is not an integer:
         ```json
         {
-          "error": {
-            "attribute": "pagination",
-            "message": "size must be an integer"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "size": "size must be integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -353,9 +403,14 @@ Update the photo of a user.
       - When the photo already exists:
         ```json
         {
-          "error": {
-            "attribute": "photo",
-            "message": "photo already exists"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "photo": "photo already exists"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -365,18 +420,28 @@ Update the photo of a user.
       - When the user is not found:
         ```json
         {
-          "error": {
-            "attribute": "user",
-            "message": "user not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user": "user is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When there is no photo to delete:
         ```json
         {
-          "error": {
-            "attribute": "photo",
-            "message": "no photo to be deleted"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "photo": "no photo to be deleted"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -437,18 +502,28 @@ Change the password of a user.
       - When the `new_password` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "new_password",
-            "message": "new_password must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "new_password": "new_password must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `new_password` field is not a string:
         ```json
         {
-          "error": {
-            "attribute": "new_password",
-            "message": "new_password must be a string"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "new_password": "new_password must be string"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -457,9 +532,14 @@ Change the password of a user.
       - When the user is not found:
         ```json
         {
-          "error": {
-            "attribute": "user",
-            "message": "user not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user": "user is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -526,18 +606,28 @@ Change the username of a user.
       - When the `new_username` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "new_username",
-            "message": "new_username must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "new_username": "new_username must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `new_username` field is not a string:
         ```json
         {
-          "error": {
-            "attribute": "new_username",
-            "message": "new_username must be a string"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "new_username": "new_username must be string"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -547,9 +637,14 @@ Change the username of a user.
       - When the user is not found:
         ```json
         {
-          "error": {
-            "attribute": "user",
-            "message": "user not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user": "user is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -613,27 +708,42 @@ Verify if the provided password matches the user's password.
       - When the `checked_password` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "checked_password",
-            "message": "checked_password must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "checked_password": "checked_password must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `checked_password` field is not a string:
         ```json
         {
-          "error": {
-            "attribute": "checked_password",
-            "message": "checked_password must be a string"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "checked_password": "checked_password must be string"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the provided password does not match the user's password:
         ```json
         {
-          "error": {
-            "attribute": "checked_password",
-            "message": "checked_password is wrong"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "checked_password": "checked_password is wrong"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -643,9 +753,14 @@ Verify if the provided password matches the user's password.
       - When the user is not found:
         ```json
         {
-          "error": {
-            "attribute": "user",
-            "message": "user not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user": "user is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -709,18 +824,28 @@ Create a new user recommendation.
       - When the `sender_username` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "sender_username": "sender_username must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `sender_username` is not found:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "sender_username": "sender_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -736,54 +861,84 @@ Create a new user recommendation.
       - When the `receiver_username` is not found:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "receiver_username": "receiver_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `receiver_username` is the same as the `sender_username`:
         ```json
         {
-          "error": {
-            "attribute": "user_recommendations",
-            "message": "receiver_username must not be the same as sender_username"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "user_recommendations": "receiver_username must not be the same as sender_username"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` field is blank:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` is not a number:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating must be a number"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating must be number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` is not between 1 and 5:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating must be between 1 to 5"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating must be between 1 to 5"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When a recommendation between the same sender and receiver already exists:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating between { sender_username: <sender_username> } to { receiver_username: <receiver_username> } already exists"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating between { sender_username: <sender_username> } to { receiver_username: <receiver_username> } already exists"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -793,18 +948,28 @@ Create a new user recommendation.
       - When the sender username is not found:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "sender_username": "sender_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the receiver username is not found:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "receiver_username": "receiver_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -896,18 +1061,28 @@ None.
       - When the `page` parameter is not a number:
         ```json
         {
-          "error": {
-            "attribute": "pagination",
-            "message": "page must be an integer"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "page": "page must be number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `size` parameter is not a number:
         ```json
         {
-          "error": {
-            "attribute": "pagination",
-            "message": "size must be an integer"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "size": "size must be number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -916,18 +1091,28 @@ None.
       - When the receiver username is not found:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "receiver_username": "receiver_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the sender username is not found:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "sender_username": "sender_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -997,36 +1182,56 @@ The request body should be a JSON object with the following properties:
       - When the `receiver_username` is missing or blank:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username must not be blank"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "receiver_username": "receiver_username must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` and `description` is missing:
         ```json
         {
-          "error": {
-            "attribute": "user_recommendation",
-            "message": "rating or description must be available"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "user_recommendation": "rating and description must be available"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` is not a number:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating must be a number"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating must be number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the `rating` is not between 1 and 5:
         ```json
         {
-          "error": {
-            "attribute": "rating",
-            "message": "rating must be between 1 and 5"
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "rating": "rating must be between 1 to 5"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -1036,27 +1241,42 @@ The request body should be a JSON object with the following properties:
       - When the receiver username is not found:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "receiver_username": "receiver_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the sender username is not found:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "sender_username": "sender_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the user recommendation is not found:
         ```json
         {
-          "error": {
-            "attribute": "user_recommendation",
-            "message": "user_recommendation not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user_recommendation": "user_recommendation is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
@@ -1116,27 +1336,42 @@ Delete an existing user recommendation.
       - When the sender username is not found:
         ```json
         {
-          "error": {
-            "attribute": "sender_username",
-            "message": "sender_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "sender_username": "sender_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the receiver username is not found:
         ```json
         {
-          "error": {
-            "attribute": "receiver_username",
-            "message": "receiver_username not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "receiver_username": "receiver_username is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
       - When the user recommendation is not found:
         ```json
         {
-          "error": {
-            "attribute": "user_recommendation",
-            "message": "user_recommendation not found"
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "user_recommendation": "user_recommendation is not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
           }
         }
         ```
