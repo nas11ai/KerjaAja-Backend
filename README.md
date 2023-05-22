@@ -822,3 +822,116 @@ Create a new user recommendation.
 | description       | hot           |
 
 ---
+
+## Get Existing User Recommendations
+
+Retrieve existing user recommendations with optional filtering and pagination.
+
+- **URL**: `/user_recommendations/read`
+- **Method**: `GET`
+
+### Request Parameters
+
+None.
+
+### Request Query Parameters
+
+| Parameter         | Type   | Description                                         |
+| ----------------- | ------ | --------------------------------------------------- |
+| page              | number | The page number for pagination (default: 1).        |
+| size              | number | The number of records per page (default: 25).       |
+| rating            | string | The sorting order for rating (`ASC` or `DESC`).     |
+| rating_from       | number | The minimum rating value to filter by.              |
+| rating_to         | number | The maximum rating value to filter by.              |
+| receiver_username | string | The username of the receiver to filter by.          |
+| sender_username   | string | The username of the sender to filter by.            |
+| created_at        | string | The sorting order for created_at (`ASC` or `DESC`). |
+| updated_at        | string | The sorting order for updated_at (`ASC` or `DESC`). |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content**:
+    ```json
+    {
+      "message": "OK",
+      "data": {
+        "type": "user_recommendations",
+        "attributes": {
+          "current_page": 1,
+          "data_count_on_current_page": 10,
+          "total_data_count": 100,
+          "total_pages": 10,
+          "records": [
+            {
+              "rating": 4,
+              "description": "Great user recommendation",
+              "created_at": "2023-05-22T10:30:00.000Z",
+              "updated_at": "2023-05-22T10:30:00.000Z",
+              "sender": {
+                "username": "john_doe"
+              },
+              "receiver": {
+                "username": "jane_smith"
+              }
+            }
+            // ...
+          ]
+        }
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+    - **Content**:
+      - When the `page` parameter is not a number:
+        ```json
+        {
+          "error": {
+            "attribute": "pagination",
+            "message": "page must be an integer"
+          }
+        }
+        ```
+      - When the `size` parameter is not a number:
+        ```json
+        {
+          "error": {
+            "attribute": "pagination",
+            "message": "size must be an integer"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+    - **Content**:
+      - When the receiver username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username not found"
+          }
+        }
+        ```
+      - When the sender username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **GET** `{{base_url}}/user_recommendations?rating=DESC&receiver_username=jane_smith&page=1&size=10`
+
+---
