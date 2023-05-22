@@ -205,14 +205,14 @@ Authenticate a user and generate access token.
 
 ---
 
-### Get Existing Users
+## Get Existing Users
 
 Retrieve existing users based on the provided query parameters.
 
 - **URL**: `{{base_url}}}/users/read`
 - **Method**: `GET`
 
-#### Query Parameters for Filtering
+### Query Parameters for Filtering
 
 | Parameter  | Type   | Description                                          |
 | ---------- | ------ | ---------------------------------------------------- |
@@ -225,7 +225,7 @@ Retrieve existing users based on the provided query parameters.
 | created_at | string | Sort users by creation date (`ASC`, `DESC`)          |
 | updated_at | string | Sort users by update date (`ASC`, `DESC`)            |
 
-#### Response
+### Response
 
 - **Success Response**
 
@@ -299,7 +299,7 @@ Retrieve existing users based on the provided query parameters.
 
 ---
 
-### Update User Photo
+## Update User Photo
 
 Update the photo of a user.
 
@@ -307,7 +307,7 @@ Update the photo of a user.
 - **Method**: `PUT`
 - **Content Type**: `multipart/form-data`
 
-#### Request Parameters
+### Request Parameters
 
 | Parameter | Type   | Description                                          |
 | --------- | ------ | ---------------------------------------------------- |
@@ -318,13 +318,13 @@ Update the photo of a user.
 - `image` can only contains 1 file in `.jpg/.jpeg/.png` format
 - `image` file must be less than `10 MB`
 
-#### Query Parameters
+### Query Parameters
 
 | Parameter | Type    | Description                                                       |
 | --------- | ------- | ----------------------------------------------------------------- |
 | delete    | boolean | (Optional) If set to `true`, deletes the user photo if it exists. |
 
-#### Response
+### Response
 
 - **Success Response**
 
@@ -388,7 +388,7 @@ Update the photo of a user.
 
 ---
 
-### Change User Password
+## Change User Password
 
 Change the password of a user.
 
@@ -396,19 +396,19 @@ Change the password of a user.
 - **Method**: `PUT`
 - **Content-type**: `application/x-www-form-urlencoded`
 
-#### Request Parameters
+### Request Parameters
 
 | Parameter | Type   | Description                                          |
 | --------- | ------ | ---------------------------------------------------- |
 | username  | string | The username of the user to change the password for. |
 
-#### Request Body
+### Request Body
 
 | Field        | Type   | Description                    |
 | ------------ | ------ | ------------------------------ |
 | new_password | string | The new password for the user. |
 
-#### Response
+### Response
 
 - **Success Response**
 
@@ -477,7 +477,7 @@ Change the password of a user.
 
 ---
 
-### Change User Username
+## Change User Username
 
 Change the username of a user.
 
@@ -485,19 +485,19 @@ Change the username of a user.
 - **Method**: `PUT`
 - **Content-type**: `application/x-www-form-urlencoded`
 
-#### Request Parameters
+### Request Parameters
 
 | Parameter | Type   | Description                         |
 | --------- | ------ | ----------------------------------- |
 | username  | string | The username of the user to change. |
 
-#### Request Body
+### Request Body
 
 | Field        | Type   | Description                    |
 | ------------ | ------ | ------------------------------ |
 | new_username | string | The new username for the user. |
 
-#### Response
+### Response
 
 - **Success Response**
 
@@ -565,9 +565,7 @@ Change the username of a user.
 
 ---
 
-## API Endpoints
-
-### Verify User Password
+## Verify User Password
 
 Verify if the provided password matches the user's password.
 
@@ -575,19 +573,19 @@ Verify if the provided password matches the user's password.
 - **Method**: `POST`
 - **Content-type**: `application/x-www-form-urlencoded`
 
-#### Request Parameters
+### Request Parameters
 
 | Parameter | Type   | Description                         |
 | --------- | ------ | ----------------------------------- |
 | username  | string | The username of the user to verify. |
 
-#### Request Body
+### Request Body
 
 | Field            | Type   | Description                                             |
 | ---------------- | ------ | ------------------------------------------------------- |
 | checked_password | string | The password to be checked against the user's password. |
 
-#### Response
+### Response
 
 - **Success Response**
 
