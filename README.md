@@ -122,6 +122,8 @@ Register a new user.
 | password | root           |
 | gender   | male           |
 
+---
+
 ## User Login
 
 Authenticate a user and generate access token.
@@ -188,6 +190,8 @@ Authenticate a user and generate access token.
 | -------- | ------------- |
 | username | root          |
 | password | root          |
+
+---
 
 ### Get Existing Users
 
@@ -265,3 +269,5 @@ Retrieve existing users based on the provided query parameters.
 #### Request Example
 
 - **GET** `{{base_url}}/users?page=1&size=5&username=john&role=user&created_at=DESC`
+
+---
