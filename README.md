@@ -521,3 +521,95 @@ Change the username of a user.
 | new_username | toor          |
 
 ---
+
+## API Endpoints
+
+### Verify User Password
+
+Verify if the provided password matches the user's password.
+
+- **URL**: `/users/verify_password/:username`
+- **Method**: `POST`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+#### Request Parameters
+
+| Parameter | Type   | Description                         |
+| --------- | ------ | ----------------------------------- |
+| username  | string | The username of the user to verify. |
+
+#### Request Body
+
+| Field            | Type   | Description                                             |
+| ---------------- | ------ | ------------------------------------------------------- |
+| checked_password | string | The password to be checked against the user's password. |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "message": "OK",
+      "data": {
+        "verify_user_password": null
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+    - **Content**:
+      - When the `checked_password` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "checked_password",
+            "message": "checked_password must not be blank"
+          }
+        }
+        ```
+      - When the `checked_password` field is not a string:
+        ```json
+        {
+          "error": {
+            "attribute": "checked_password",
+            "message": "checked_password must be a string"
+          }
+        }
+        ```
+      - When the provided password does not match the user's password:
+        ```json
+        {
+          "error": {
+            "attribute": "checked_password",
+            "message": "checked_password is wrong"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the user is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user",
+            "message": "user not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT**: `{{base_url}}/users/verify_password/john_doe`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+| Field            | Input Example |
+| ---------------- | ------------- |
+| checked_password | root          |
+
+---

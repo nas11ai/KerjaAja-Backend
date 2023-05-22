@@ -3,7 +3,7 @@ const { verifyUserPassword } = require('../service');
 
 const { SuccessResponse, DataDetails } = require("../../utilities/response_model");
 
-router.get('/:username', async (req, res, next) => {
+router.post('/:username', async (req, res, next) => {
   try {
     await verifyUserPassword(req);
 
