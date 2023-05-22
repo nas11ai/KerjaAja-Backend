@@ -613,3 +613,162 @@ Verify if the provided password matches the user's password.
 | checked_password | root          |
 
 ---
+
+# User Recommendation
+
+## Create New User Recommendation
+
+Create a new user recommendation.
+
+- **URL**: `/user_recommendations/create`
+- **Method**: `POST`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+### Request Body
+
+| Field             | Type   | Description                                                          |
+| ----------------- | ------ | -------------------------------------------------------------------- |
+| sender_username   | string | The username of the user giving the recommendation.                  |
+| receiver_username | string | The username of the user receiving the recommendation.               |
+| rating            | number | The rating given by the sender (between 1 and 5).                    |
+| description       | string | (Optional) Additional description or comment for the recommendation. |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 200,
+      "status": "OK",
+      "data": null,
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the `sender_username` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username must not be blank"
+          }
+        }
+        ```
+      - When the `sender_username` is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username not found"
+          }
+        }
+        ```
+      - When the `receiver_username` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username must not be blank"
+          }
+        }
+        ```
+      - When the `receiver_username` is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username not found"
+          }
+        }
+        ```
+      - When the `receiver_username` is the same as the `sender_username`:
+        ```json
+        {
+          "error": {
+            "attribute": "user_recommendations",
+            "message": "receiver_username must not be the same as sender_username"
+          }
+        }
+        ```
+      - When the `rating` field is blank:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating must not be blank"
+          }
+        }
+        ```
+      - When the `rating` is not a number:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating must be a number"
+          }
+        }
+        ```
+      - When the `rating` is not between 1 and 5:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating must be between 1 to 5"
+          }
+        }
+        ```
+      - When a recommendation between the same sender and receiver already exists:
+        ```json
+        {
+          "error": {
+            "attribute": "rating",
+            "message": "rating between { sender_username: <sender_username> } to { receiver_username: <receiver_username> } already exists"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the sender username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "sender_username",
+            "message": "sender_username not found"
+          }
+        }
+        ```
+      - When the receiver username is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "receiver_username",
+            "message": "receiver_username not found"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT**: `{{base_url}}/user_recommendations/create`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+| Field             | Input Example |
+| ----------------- | ------------- |
+| sender_username   | toor          |
+| receiver_username | root          |
+| rating            | 5             |
+| description       | hot           |
+
+---
