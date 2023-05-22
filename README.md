@@ -218,6 +218,7 @@ Retrieve existing users based on the provided query parameters.
 - **Success Response**
 
   - **Code**: `200 OK`
+  - **Content-type**: `application/json`
   - **Content**:
     ```json
     {
@@ -246,6 +247,7 @@ Retrieve existing users based on the provided query parameters.
 
 - **Error Response**
   - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
     - **Content**:
       - When `page` is not an integer:
         ```json
@@ -266,8 +268,91 @@ Retrieve existing users based on the provided query parameters.
         }
         ```
 
-#### Request Example
+### Request Example
 
 - **GET** `{{base_url}}/users?page=1&size=5&username=john&role=user&created_at=DESC`
+
+---
+
+### Update User Photo
+
+Update the photo of a user.
+
+- **URL**: `/users/profile_photo/:username`
+- **Method**: `PUT`
+- **Content Type**: `multipart/form-data`
+
+#### Request Parameters
+
+| Parameter | Type   | Description                                          |
+| --------- | ------ | ---------------------------------------------------- |
+| username  | string | The username of the user to update the photo for.    |
+| image     | file   | The image file to be uploaded as the new user photo. |
+
+- note:
+- `image` can only contains 1 file in `.jpg/.jpeg/.png` format
+- `image` file must be less than `10 MB`
+
+#### Query Parameters
+
+| Parameter | Type    | Description                                                       |
+| --------- | ------- | ----------------------------------------------------------------- |
+| delete    | boolean | (Optional) If set to `true`, deletes the user photo if it exists. |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `204 NO_CONTENT`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "message": "NO_CONTENT",
+      "data": {
+        "user_photos": null
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `400 BAD_REQUEST`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the photo already exists:
+        ```json
+        {
+          "error": {
+            "attribute": "photo",
+            "message": "photo already exists"
+          }
+        }
+        ```
+  - **Code**: `404 NOT_FOUND`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When the user is not found:
+        ```json
+        {
+          "error": {
+            "attribute": "user",
+            "message": "user not found"
+          }
+        }
+        ```
+      - When there is no photo to delete:
+        ```json
+        {
+          "error": {
+            "attribute": "photo",
+            "message": "no photo to be deleted"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT** `/users/john_doe?delete=true`
+- **Content-Type:** `multipart/form-data`
 
 ---
