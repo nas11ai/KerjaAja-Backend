@@ -21,6 +21,10 @@ const {
   deleteExistingUserRecommendationRouter,
 } = require('./user-recommendation-features/controller');
 
+const {
+  createNewProjectCategoryRouter,
+} = require("./project-category-features/controller");
+
 const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
 const { errorHandler } = require('./middlewares');
@@ -47,6 +51,8 @@ app.use('/user_recommendations/create', createNewUserRecommendationRouter);
 app.use('/user_recommendations/read', readExistingUserRecommendationRouter);
 app.use('/user_recommendations/update', updateExistingUserRecommendationRouter);
 app.use('/user_recommendations/delete', deleteExistingUserRecommendationRouter);
+
+app.use('/project_categories/create', createNewProjectCategoryRouter);
 
 const main = async () => {
   await connectToDatabase();
