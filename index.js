@@ -25,6 +25,7 @@ const {
   createNewProjectCategoryRouter,
   getExistingProjectCategoryRouter,
   updateExistingProjectCategoryRouter,
+  deleteExistingProjectCategoryRouter,
 } = require("./project-category-features/controller");
 
 const { PORT } = require("./utilities/config");
@@ -57,6 +58,7 @@ app.use('/user_recommendations/delete', deleteExistingUserRecommendationRouter);
 app.use('/project_categories/create', createNewProjectCategoryRouter);
 app.use('/project_categories/read', getExistingProjectCategoryRouter);
 app.use('/project_categories/update', updateExistingProjectCategoryRouter);
+app.use('/project_categories/delete', deleteExistingProjectCategoryRouter);
 
 const main = async () => {
   await connectToDatabase();
