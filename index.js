@@ -28,6 +28,10 @@ const {
   deleteExistingProjectCategoryRouter,
 } = require("./project-category-features/controller");
 
+const {
+  createNewProjectRouter,
+} = require("./project-features/controller");
+
 const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
 const { errorHandler } = require('./middlewares');
@@ -59,6 +63,8 @@ app.use('/project_categories/create', createNewProjectCategoryRouter);
 app.use('/project_categories/read', getExistingProjectCategoryRouter);
 app.use('/project_categories/update', updateExistingProjectCategoryRouter);
 app.use('/project_categories/delete', deleteExistingProjectCategoryRouter);
+
+app.use('/projects/create', createNewProjectRouter);
 
 const main = async () => {
   await connectToDatabase();
