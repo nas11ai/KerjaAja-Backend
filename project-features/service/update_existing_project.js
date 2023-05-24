@@ -20,6 +20,7 @@ const updateExistingProject = async (req) => {
 
   const project = await Project.findByPk(id, {
     attributes: [
+      "id",
       "title",
       "status",
       "fee",
@@ -95,8 +96,6 @@ const updateExistingProject = async (req) => {
 
       project.region_id = region.id;
     }
-
-    project.id = id;
 
     await project.save({ transaction: t });
 
