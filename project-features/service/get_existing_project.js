@@ -116,6 +116,7 @@ const getExistingProject = async (req) => {
 
   const { count, rows } = await Project.findAndCountAll({
     attributes: [
+      "id",
       "title",
       "status",
       "fee",
