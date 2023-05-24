@@ -35,13 +35,14 @@ ProjectCategory.hasMany(ProjectCategoryMap, {
 });
 
 ProjectCategoryMap.belongsTo(ProjectCategory, {
-  foreignKey: "category_id",
+  foreignKey: "project_category_id",
   as: "project_category",
   onUpdate: "CASCADE",
   onDelete: "CASCADE",
 });
 
 Project.hasMany(ProjectCategoryMap, {
+  as: "categories",
   onUpdate: "CASCADE",
   onDelete: "CASCADE",
 });

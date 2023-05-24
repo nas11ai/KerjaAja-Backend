@@ -30,6 +30,7 @@ const {
 
 const {
   createNewProjectRouter,
+  getExistingProjectRouter,
 } = require("./project-features/controller");
 
 const { PORT } = require("./utilities/config");
@@ -65,6 +66,7 @@ app.use('/project_categories/update', updateExistingProjectCategoryRouter);
 app.use('/project_categories/delete', deleteExistingProjectCategoryRouter);
 
 app.use('/projects/create', createNewProjectRouter);
+app.use('/projects/read', getExistingProjectRouter);
 
 const main = async () => {
   await connectToDatabase();

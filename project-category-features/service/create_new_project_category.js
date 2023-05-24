@@ -21,6 +21,15 @@ const createNewProjectCategory = async (req) => {
     throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
   }
 
+  const existingProjectCategory = await ProjectCategory.findOne({ where: { name } });
+
+  if (existingProjectCategory) {
+    const err = new ErrorDetails("ProjectCategoryError", "name", "project_categories name already exist");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+  }
+
   await ProjectCategory.create({ name });
 
   return;

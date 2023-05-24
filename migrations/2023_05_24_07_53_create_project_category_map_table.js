@@ -30,7 +30,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      category_id: {
+      project_category_id: {
         type: DataTypes.UUID,
         allowNull: false,
         validate: {
@@ -58,7 +58,7 @@ module.exports = {
         },
         unique_project_category: {
           customIndex: true,
-          fields: ['project_id', 'category_id'],
+          fields: ['project_id', 'project_category_id'],
         },
       },
     });

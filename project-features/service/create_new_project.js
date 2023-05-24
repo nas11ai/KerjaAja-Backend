@@ -127,9 +127,9 @@ const createNewProject = async (req) => {
         throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
       }
 
-      const { id: category_id } = category;
+      const { id: project_category_id } = category;
 
-      await ProjectCategoryMap.create({ project_id, category_id }, {
+      await ProjectCategoryMap.create({ project_id, project_category_id }, {
         transaction: t,
       });
     }

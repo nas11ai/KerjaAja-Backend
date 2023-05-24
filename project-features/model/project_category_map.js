@@ -32,7 +32,7 @@ ProjectCategoryMap.init({
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   },
-  category_id: {
+  project_category_id: {
     type: DataTypes.UUID,
     allowNull: false,
     validate: {
@@ -56,7 +56,7 @@ ProjectCategoryMap.init({
     },
     {
       unique: 'unique_project_category',
-      fields: ['project_id', 'category_id'],
+      fields: ['project_id', 'project_category_id'],
     },
   ],
 });
