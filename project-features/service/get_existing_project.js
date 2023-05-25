@@ -99,6 +99,8 @@ const getExistingProject = async (req) => {
       "status",
       "fee",
       "deadline",
+      "latitude",
+      "longitude",
       'created_at',
       'updated_at',
     ],
