@@ -73,7 +73,7 @@ Project.init({
     },
   },
   latitude: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.DECIMAL(18, 15),
     allowNull: false,
     validate: {
       notNull: {
@@ -82,7 +82,7 @@ Project.init({
     },
   },
   longitude: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.DECIMAL(18, 15),
     allowNull: false,
     validate: {
       notNull: {
