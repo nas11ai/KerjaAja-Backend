@@ -7,6 +7,33 @@ const { User } = require("../../user-features/model");
 const { Project, ProjectCategoryMap } = require("../model");
 
 const getExistingProject = async (req) => {
+  const { id } = req.query;
+
+  if (id) {
+    const project = await Project.findByPk(id, {
+      attributes: [
+        "id",
+        "title",
+        "status",
+        "fee",
+        "deadline",
+        "latitude",
+        "longitude",
+        "created_at",
+        "updated_at",
+      ],
+    });
+
+    if (!project) {
+      const err = new ErrorDetails("ProjectError", "project", "project not found");
+      // TODO: ganti console ke log kalau sudah mau production
+      console.error(err);
+      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    }
+
+    return project;
+  }
+
   // pagination
   if (req.query.page && isNaN(Number(req.query.page))) {
     const err = new ErrorDetails("OfficeError", "pagination", "page must be integer");
