@@ -4,7 +4,7 @@ const { ErrorResponse, ErrorDetails } = require("../../utilities/response_model"
 const { ProjectCategory } = require("../../project-category-features/model");
 const { User } = require("../../user-features/model");
 
-const { ProjectRegion, Project, ProjectCategoryMap } = require("../model");
+const { Project, ProjectCategoryMap } = require("../model");
 
 const getExistingProject = async (req) => {
   // pagination
@@ -36,28 +36,6 @@ const getExistingProject = async (req) => {
     }
 
     projectWhere.status = { [Op.like]: `${req.query.status}` };
-  }
-
-  // query project region
-  if (req.query.region_name) {
-    if (req.query.region_name === 'ASC') {
-      projectOrder.push(['region_id', 'ASC']);
-    }
-
-    if (req.query.region_name === 'DESC') {
-      projectOrder.push(['region_id', 'DESC']);
-    }
-
-    const region = await ProjectRegion.findOne({ where: { name: req.query.region_name } });
-
-    if (!region) {
-      const err = new ErrorDetails("ProjectError", "region_name", "region_name not found");
-      // TODO: ganti console ke log kalau sudah mau production
-      console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
-    }
-
-    projectWhere.region_id = { [Op.like]: `${region.id}` };
   }
 
   // query project fee
@@ -129,11 +107,6 @@ const getExistingProject = async (req) => {
         model: User,
         as: "owner",
         attributes: ["username"],
-      },
-      {
-        model: ProjectRegion,
-        as: "region",
-        attributes: ["name"],
       },
       {
         model: ProjectCategoryMap,

@@ -1,7 +1,6 @@
 const { User } = require("../../user-features/model");
 const { ProjectCategory } = require("../../project-category-features/model");
 
-const ProjectRegion = require("./project_region");
 const Project = require("./project");
 const ProjectCategoryMap = require("./project_category_map");
 
@@ -13,18 +12,6 @@ User.hasMany(Project, {
 Project.belongsTo(User, {
   foreignKey: "owner_id",
   as: "owner",
-  onUpdate: "CASCADE",
-  onDelete: "CASCADE",
-});
-
-ProjectRegion.hasMany(Project, {
-  onUpdate: "CASCADE",
-  onDelete: "CASCADE",
-});
-
-Project.belongsTo(ProjectRegion, {
-  foreignKey: "region_id",
-  as: "region",
   onUpdate: "CASCADE",
   onDelete: "CASCADE",
 });
@@ -54,4 +41,4 @@ ProjectCategoryMap.belongsTo(Project, {
   onDelete: "CASCADE",
 });
 
-module.exports = { ProjectRegion, Project, ProjectCategoryMap };
+module.exports = { Project, ProjectCategoryMap };

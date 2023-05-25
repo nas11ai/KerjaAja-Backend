@@ -70,17 +70,23 @@ module.exports = {
           },
         },
       },
-      region_id: {
-        type: DataTypes.UUID,
+      latitude: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Project Region ID can\'t be empty',
+            msg: 'Please enter the Project Region latitude',
           },
         },
-        references: { model: 'project_regions', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      },
+      longitude: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Please enter the Project Region longitude',
+          },
+        },
       },
       created_at: {
         type: DataTypes.DATE,

@@ -4,10 +4,10 @@ const { ErrorResponse, ErrorDetails } = require("../../utilities/response_model"
 const { User } = require("../../user-features/model");
 const { ProjectCategory } = require("../../project-category-features/model");
 
-const { ProjectRegion, Project, ProjectCategoryMap } = require("../model");
+const { Project, ProjectCategoryMap } = require("../model");
 
 const createNewProject = async (req) => {
-  const { title, status, project_fee, deadline, region_name, owner_username, category_list } = req.body
+  const { title, status, project_fee, deadline, owner_username, category_list } = req.body
 
   if (!title) {
     const err = new ErrorDetails("ProjectError", "title", "title must not be empty");
@@ -93,25 +93,9 @@ const createNewProject = async (req) => {
 
   const { id: owner_id } = user;
 
-  if (!region_name) {
-    const err = new ErrorDetails("ProjectError", "region_name", "region_name must not be empty");
-    // TODO: ganti console ke log kalau sudah mau production
-    console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
-  }
-
   await sequelize.transaction(async (t) => {
-    let region = await ProjectRegion.findOne({ where: { name: region_name } });
 
-    if (!region) {
-      region = await ProjectRegion.create({ name: region_name }, {
-        transaction: t,
-      });
-    }
-
-    const { id: region_id } = region;
-
-    const project = await Project.create({ title, status, fee, deadline, region_id, owner_id }, {
+    const project = await Project.create({ title, status, fee, deadline, owner_id }, {
       transaction: t,
     });
 

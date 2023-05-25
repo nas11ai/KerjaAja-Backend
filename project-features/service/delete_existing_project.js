@@ -14,7 +14,6 @@ const deleteExistingProject = async (req) => {
       "status",
       "fee",
       "deadline",
-      "region_id"
     ],
   });
 

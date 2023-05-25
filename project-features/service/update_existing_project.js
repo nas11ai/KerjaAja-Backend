@@ -1,15 +1,14 @@
-const { Op } = require('sequelize');
 const { sequelize } = require("../../utilities/db");
 
 const { ErrorResponse, ErrorDetails } = require("../../utilities/response_model");
 const { ProjectCategory } = require("../../project-category-features/model");
 
-const { ProjectRegion, Project, ProjectCategoryMap } = require("../model");
+const { Project, ProjectCategoryMap } = require("../model");
 
 const updateExistingProject = async (req) => {
-  const { title, status, project_fee, deadline, region_name, category_list } = req.body;
+  const { title, status, project_fee, deadline, category_list } = req.body;
 
-  if (!(title || status || project_fee || deadline || region_name || category_list)) {
+  if (!(title || status || project_fee || deadline || category_list)) {
     const err = new ErrorDetails("ProjectError", "request_body", "request_body must not be blank");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
@@ -25,7 +24,6 @@ const updateExistingProject = async (req) => {
       "status",
       "fee",
       "deadline",
-      "region_id"
     ],
   });
 
@@ -85,17 +83,6 @@ const updateExistingProject = async (req) => {
   }
 
   await sequelize.transaction(async (t) => {
-    if (region_name) {
-      let region = await ProjectRegion.findOne({ where: { name: region_name } });
-
-      if (!region) {
-        region = await ProjectRegion.create({ name: region_name }, {
-          transaction: t,
-        });
-      }
-
-      project.region_id = region.id;
-    }
 
     await project.save({ transaction: t });
 
