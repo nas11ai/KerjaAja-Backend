@@ -1386,3 +1386,102 @@ Delete an existing user recommendation.
 - **DELETE** `{{base_url}}/user_recommendations/delete/john_doe?receiver_username=jane_smith`
 
 ---
+
+# Project Category
+
+## Create New Project Category
+
+Create a new project category.
+
+- **URL**: `/project_categories/create`
+- **Method**: `POST`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+### Request Body
+
+| Parameter | Type   | Description               |
+| --------- | ------ | ------------------------- |
+| name      | string | The name of the category. |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `201 Created`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 201,
+      "status": "CREATED",
+      "data": {
+        "type": "user_recommendations",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+
+      - When the category name is blank:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "name": "project_categories name must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the category name is not a string or null:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "name": "project_categories name must be a string, project_categories name must not be null"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the category name already exists:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "name": "project_categories name already exist"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **Content-type**: `application/x-www-form-urlencoded`
+- **URL**: `{{base_url}}/project_categories/create`
+
+| Field | Input Example   |
+| ----- | --------------- |
+| name  | Web Development |
+
+---
