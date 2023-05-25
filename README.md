@@ -1485,3 +1485,117 @@ Create a new project category.
 | name  | Web Development |
 
 ---
+
+## Get Existing Project Categories
+
+Retrieve existing project categories with optional pagination and sorting.
+
+- **URL**: `/project_categories/read`
+- **Method**: `GET`
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                             |
+| ---------- | ------ | ------------------------------------------------------- |
+| page       | number | The page number for pagination.                         |
+| size       | number | The number of items per page.                           |
+| name       | string | Sort by name in ascending or descending order.          |
+| created_at | string | Sort by creation date in ascending or descending order. |
+| updated_at | string | Sort by update date in ascending or descending order.   |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content**:
+    ```json
+    {
+      "code": 200,
+      "status": "OK",
+      "data": {
+        "type": "project_categories",
+        "attributes": {
+          "current_page": 1,
+          "data_count_on_current_page": 5,
+          "total_data_count": 5,
+          "total_pages": 1,
+          "records": [
+            {
+              "name": "Web Development",
+              "created_at": "2023-05-23T22:30:30.000Z",
+              "updated_at": "2023-05-23T22:30:30.000Z"
+            },
+            {
+              "name": "Programming",
+              "created_at": "2023-05-24T05:42:09.000Z",
+              "updated_at": "2023-05-24T05:42:09.000Z"
+            },
+            {
+              "name": "IOS Development",
+              "created_at": "2023-05-24T05:35:20.000Z",
+              "updated_at": "2023-05-24T05:35:20.000Z"
+            },
+            {
+              "name": "Android Development",
+              "created_at": "2023-05-24T05:35:13.000Z",
+              "updated_at": "2023-05-24T05:35:13.000Z"
+            },
+            {
+              "name": "Mobile Development",
+              "created_at": "2023-05-24T22:23:56.000Z",
+              "updated_at": "2023-05-24T22:23:56.000Z"
+            }
+          ]
+        }
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+
+    - **Content**:
+
+      - When the page parameter is not an integer:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "pagination",
+            "message": "page must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the size parameter is not an integer:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "pagination",
+            "message": "size must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **GET** `{{base_url}}/project_categories/read?name=Programming`
+
+---
