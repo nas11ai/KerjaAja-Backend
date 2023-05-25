@@ -7,7 +7,7 @@ const { ProjectCategory } = require("../../project-category-features/model");
 const { Project, ProjectCategoryMap } = require("../model");
 
 const createNewProject = async (req) => {
-  const { title, status, project_fee, deadline, owner_username, category_list } = req.body
+  const { title, status, project_fee, deadline, owner_username, region_latitude, region_longitude, category_list } = req.body
 
   if (!title) {
     const err = new ErrorDetails("ProjectError", "title", "title must not be empty");
@@ -93,9 +93,41 @@ const createNewProject = async (req) => {
 
   const { id: owner_id } = user;
 
+  if (!region_latitude) {
+    const err = new ErrorDetails("ProjectError", "region_latitude", "region_latitude must not be empty");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+  }
+
+  const latitude = parseFloat(region_latitude);
+
+  if (isNaN(latitude)) {
+    const err = new ErrorDetails("ProjectError", "region_latitude", "region_latitude must be number");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+  }
+
+  if (!region_longitude) {
+    const err = new ErrorDetails("ProjectError", "region_longitude", "region_longitude must not be empty");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+  }
+
+  const longitude = parseFloat(region_longitude);
+
+  if (isNaN(longitude)) {
+    const err = new ErrorDetails("ProjectError", "region_longitude", "region_longitude must be number");
+    // TODO: ganti console ke log kalau sudah mau production
+    console.error(err);
+    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+  }
+
   await sequelize.transaction(async (t) => {
 
-    const project = await Project.create({ title, status, fee, deadline, owner_id }, {
+    const project = await Project.create({ title, status, fee, deadline, latitude, longitude, owner_id }, {
       transaction: t,
     });
 
