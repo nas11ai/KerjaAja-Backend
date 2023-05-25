@@ -6,7 +6,7 @@ const { ProjectCategory } = require("../../project-category-features/model");
 const { Project, ProjectCategoryMap } = require("../model");
 
 const updateExistingProject = async (req) => {
-  const { title, status, project_fee, deadline, category_list } = req.body;
+  const { title, status, project_fee, deadline, region_latitude, region_longitude, category_list } = req.body;
 
   if (!(title || status || project_fee || deadline || category_list)) {
     const err = new ErrorDetails("ProjectError", "request_body", "request_body must not be blank");
@@ -24,6 +24,8 @@ const updateExistingProject = async (req) => {
       "status",
       "fee",
       "deadline",
+      "latitude",
+      "longitude",
     ],
   });
 
@@ -80,6 +82,32 @@ const updateExistingProject = async (req) => {
     }
 
     project.deadline = deadline;
+  }
+
+  if (region_latitude) {
+    const latitude = parseFloat(region_latitude);
+
+    if (isNaN(latitude)) {
+      const err = new ErrorDetails("ProjectError", "region_latitude", "region_latitude must be number");
+      // TODO: ganti console ke log kalau sudah mau production
+      console.error(err);
+      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    }
+
+    project.latitude = latitude;
+  }
+
+  if (region_longitude) {
+    const longitude = parseFloat(region_longitude);
+
+    if (isNaN(longitude)) {
+      const err = new ErrorDetails("ProjectError", "region_longitude", "region_longitude must be number");
+      // TODO: ganti console ke log kalau sudah mau production
+      console.error(err);
+      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    }
+
+    project.longitude = longitude;
   }
 
   await sequelize.transaction(async (t) => {
