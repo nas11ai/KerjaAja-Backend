@@ -2584,3 +2584,60 @@ Update an existing project.
 | category_list    | ["Android Development", "IOS Development"]                                                |
 
 ---
+
+## Delete Existing Project
+
+Delete an existing project.
+
+- **URL**: `/projects/delete/:id`
+- **Method**: `DELETE`
+
+### Request Parameters
+
+| Parameter | Type   | Description                     |
+| --------- | ------ | ------------------------------- |
+| id        | string | The ID of the project to delete |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content-Type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "projects",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When `project` is not found:
+        ```json
+        {
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "project": "project not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **DELETE** `{{base_url}}/projects/delete/c9f43b1-cbfb-4631-9bf2-1ffc19010bd7`
