@@ -1770,3 +1770,58 @@ Update an existing project category.
 | image    | file            |
 
 ---
+
+## Delete Existing Project Category
+
+Delete an existing project category.
+
+- **URL**: `/project_categories/delete/:category_name`
+- **Method**: `DELETE`
+
+### Request Parameters
+
+| Parameter     | Type   | Description                                |
+| ------------- | ------ | ------------------------------------------ |
+| category_name | string | The name of the project category to delete |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content**:
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "project_categories",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+  - **Code**: `404 Not Found`
+    - **Content**:
+      ```json
+      {
+        "code": 404,
+        "status": "NOT_FOUND",
+        "errors": {
+          "category_name": "category_name not found"
+        },
+        "meta": {
+          "version": "<API_VERSION>",
+          "timestamp": "<Current Timestamp>"
+        }
+      }
+      ```
+
+### Request Example
+
+---
