@@ -33,6 +33,24 @@ ProjectCategory.init({
       },
     },
   },
+  photo_path: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'Please enter the Project Category photo_path',
+      },
+    },
+  },
+  photo_url: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'Please enter the Project Category photo_url',
+      },
+    },
+  },
 }, {
   sequelize,
   underscored: true,
