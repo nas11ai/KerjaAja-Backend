@@ -2279,3 +2279,308 @@ Retrieve existing projects based on specific query parameters.
 - **GET** `{{base_url}}/projects/read?page=1&size=5&status=Open&category_names=Programming&category_names=Web%20Development`
 
 ---
+
+## Update Existing Project
+
+Update an existing project.
+
+- **URL**: `/projects/update/:id`
+- **Method**: `PUT`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+### Request Parameters
+
+| Parameter | Type   | Description                     |
+| --------- | ------ | ------------------------------- |
+| id        | string | The ID of the project to update |
+
+### Request Body
+
+| Parameter        | Type   | Description                                               |
+| ---------------- | ------ | --------------------------------------------------------- |
+| title            | string | The new title of the project (optional)                   |
+| status           | string | The new status of the project (optional)                  |
+| project_fee      | number | The new project fee (optional)                            |
+| deadline         | string | The new deadline of the project (optional)                |
+| region_latitude  | number | The new latitude of the project region (optional)         |
+| region_longitude | number | The new longitude of the project region (optional)        |
+| category_list    | string | The new list of project categories (optional, JSON array) |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content-Type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "projects",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+
+      - When `title` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "title": "title must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `status` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "status": "status must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `status` is not between "Open", "In Progress", or "Closed":
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "status": "status value must be between 'Open' or 'In Progress' or 'Closed'"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `project_fee` is not number:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "project_fee": "project_fee must be a number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `project_fee` is less than 0:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "project_fee": "project_fee must not be less than 0"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `deadline` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "deadline": "deadline must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `deadline` is not in "YYYY-MM-DD" format:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "deadline": "deadline must be within 'YYYY-MM-DD' format"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `category_list` is not an array:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "category_list": "category_list must be a string of array"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `category_list` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "category_list": "category_list must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `region_latitude` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "region_latitude": "region_latitude must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `region_latitude` is not a number:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "region_latitude": "region_latitude must be a number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `region_longitude` is empty:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "region_longitude": "region_longitude must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+      - When `region_longitude` is not a number:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "region_longitude": "region_longitude must be a number"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+  - **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When `project` is not found:
+        ```json
+        {
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "project": "project not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the specified `owner_username` is not found:
+        ```json
+        {
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "owner_username": "owner_username not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When a project category in the `category_list` is not found:
+        ```json
+        {
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "category_list": "category_list item: <category_name> not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT** `{{base_url}}/projects/update/cc9f43b1-cbfb-4631-9bf2-1ffc19010bd7`
+- **Content-Type:** `application/x-www-form-urlencoded`
+
+| Field            | Input Example                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| title            | Tolong buatkan saya Moodle versi mobile untuk sekolah A yang bisa diakses android dan ios |
+| status           | Open                                                                                      |
+| project_fee      | 100000000                                                                                 |
+| deadline         | 2023-10-01                                                                                |
+| owner_username   | root                                                                                      |
+| region_latitude  | -1.1404097541004128                                                                       |
+| region_longitude | 116.86331762187554                                                                        |
+| category_list    | ["Android Development", "IOS Development"]                                                |
+
+---
