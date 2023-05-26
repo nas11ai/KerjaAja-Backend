@@ -1508,6 +1508,7 @@ Retrieve existing project categories with optional pagination and sorting.
 - **Success Response**
 
   - **Code**: `200 OK`
+  - **Content-type**: `application/json`
   - **Content**:
     ```json
     {
@@ -1559,6 +1560,7 @@ Retrieve existing project categories with optional pagination and sorting.
 - **Error Response**
 
   - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
 
     - **Content**:
 
@@ -1597,5 +1599,131 @@ Retrieve existing project categories with optional pagination and sorting.
 ### Request Example
 
 - **GET** `{{base_url}}/project_categories/read?name=Programming`
+
+---
+
+### Update Existing Project Category
+
+Update an existing project category.
+
+- **URL**: `/project_categories/update/:category_name`
+- **Method**: `PUT`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+#### Path Parameters
+
+| Parameter     | Type   | Description                                 |
+| ------------- | ------ | ------------------------------------------- |
+| category_name | string | The name of the project category to update. |
+
+#### Request Body
+
+| Field    | Type   | Description                            |
+| -------- | ------ | -------------------------------------- |
+| new_name | string | The new name for the project category. |
+
+#### Response
+
+- **Success Response**
+
+  - **Code**: `204 No Content`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 204,
+      "status": "NO_CONTENT",
+      "data": {
+        "type": "project_categories",
+        "attribute": null
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+
+      - When the `new_name` field is blank:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "new_name",
+            "message": "project_categories new_name must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+      - When the `new_name` field is not a string:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "new_name",
+            "message": [
+              "project_categories new_name must be a string",
+              "project_categories new_name must not be null"
+            ]
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the project category with the specified name does not exist:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "category_name",
+            "message": "project_categories name not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When the `new_name` is already taken by another project category:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "attribute": "new_name",
+            "message": "project_categories new_name has been taken"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **PUT**: `{{base_url}}/project_categories/update/Mobile%20Development`
+- **Content-type**: `application/x-www-form-urlencoded`
+
+| Field    | Input Example   |
+| -------- | --------------- |
+| new_name | IOS Development |
 
 ---
