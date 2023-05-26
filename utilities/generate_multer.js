@@ -15,7 +15,7 @@ const generateMulter = (assetType) => {
   return multer({
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
-        const imagePath = path.join(path.resolve(''), 'assets', `${assetType}`, `${req.body.username ? req.body.username : req.params.username ? req.params.username : req.params.name ? req.params.name : req.body.name}`);
+        const imagePath = path.join(path.resolve(''), 'assets', `${assetType}`, `${req.body.username ? req.body.username : req.params.username ? req.params.username : req.params.category_name ? req.params.category_name : req.body.name}`);
 
         if (!fs.existsSync(imagePath)) {
           fs.mkdirSync(imagePath, { recursive: true });
@@ -33,7 +33,7 @@ const generateMulter = (assetType) => {
         let seconds = date.getSeconds().toString().padStart(2, '0');
         let formattedDate = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
 
-        cb(null, `${req.body.username || req.params.username || req.params.name || req.body.name}_${formattedDate}_${file.originalname}`);
+        cb(null, `${req.body.username || req.params.username || req.params.category_name || req.body.name}_${formattedDate}_${file.originalname}`);
       }
     }),
     fileFilter: function (req, file, cb) {
