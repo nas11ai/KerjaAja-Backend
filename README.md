@@ -1395,13 +1395,14 @@ Create a new project category.
 
 - **URL**: `/project_categories/create`
 - **Method**: `POST`
-- **Content-type**: `application/x-www-form-urlencoded`
+- **Content-Type**: `multipart/form-data`
 
 ### Request Body
 
-| Parameter | Type   | Description               |
-| --------- | ------ | ------------------------- |
-| name      | string | The name of the category. |
+| Parameter | Type   | Description                                       |
+| --------- | ------ | ------------------------------------------------- |
+| name      | string | The name of the category.                         |
+| image     | file   | The image file representing the project category. |
 
 ### Response
 
@@ -1432,6 +1433,20 @@ Create a new project category.
 
     - **Content**:
 
+      - When the image field is blank:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "photo": "photo must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
       - When the category name is blank:
         ```json
         {
@@ -1477,12 +1492,13 @@ Create a new project category.
 
 ### Request Example
 
-- **Content-type**: `application/x-www-form-urlencoded`
+- **Content-Type**: `multipart/form-data`
 - **URL**: `{{base_url}}/project_categories/create`
 
 | Field | Input Example   |
 | ----- | --------------- |
 | name  | Web Development |
+| image | file            |
 
 ---
 
