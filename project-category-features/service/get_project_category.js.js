@@ -57,6 +57,7 @@ const getExistingProjectCategory = async (req) => {
   const { count, rows } = await ProjectCategory.findAndCountAll({
     attributes: [
       'name',
+      'photo_url',
       'created_at',
       'updated_at',
     ],
