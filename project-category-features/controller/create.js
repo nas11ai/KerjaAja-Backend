@@ -1,9 +1,12 @@
 const router = require('express').Router();
-const { createNewProjectCategory } = require('../service');
+const generateMulter = require('../../utilities/generate_multer');
 
+const { createNewProjectCategory } = require('../service');
 const { SuccessResponse, DataDetails } = require("../../utilities/response_model");
 
-router.post('/', async (req, res, next) => {
+const upload = generateMulter("project_category_photo");
+
+router.post('/', upload.single("image"), async (req, res, next) => {
   try {
     await createNewProjectCategory(req);
 

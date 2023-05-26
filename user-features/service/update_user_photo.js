@@ -56,10 +56,8 @@ const updateUserPhoto = async (req) => {
       }
     });
   } catch (error) {
-    if (req.files && req.files.length > 0) {
-      for (const image of req.files) {
-        await fs.unlink(image.path);
-      }
+    if (req.file.path) {
+      await fs.unlink(req.file.path);
     }
 
     throw error;
