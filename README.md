@@ -1585,8 +1585,7 @@ Retrieve existing project categories with optional pagination and sorting.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "pagination",
-            "message": "page must be an integer"
+            "pagination": "page must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1601,8 +1600,7 @@ Retrieve existing project categories with optional pagination and sorting.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "pagination",
-            "message": "size must be an integer"
+            "pagination": "size must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1623,7 +1621,7 @@ Update an existing project category.
 
 - **URL**: `/project_categories/update/:category_name`
 - **Method**: `PUT`
-- **Content-type**: `application/x-www-form-urlencoded`
+- **Content-Type**: `multipart/form-data`
 
 #### Path Parameters
 
@@ -1633,9 +1631,10 @@ Update an existing project category.
 
 #### Request Body
 
-| Field    | Type   | Description                            |
-| -------- | ------ | -------------------------------------- |
-| new_name | string | The new name for the project category. |
+| Field    | Type   | Description                                                             |
+| -------- | ------ | ----------------------------------------------------------------------- |
+| new_name | string | The new name for the project category.                                  |
+| image    | file   | (Optional) The new image file representing the updated project category |
 
 #### Response
 
@@ -1666,6 +1665,38 @@ Update an existing project category.
 
     - **Content**:
 
+      - When the `request_body` field is blank:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "request_body": "project_categories request_body must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+      - When the image file is missing:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "image": "photo must not be blank"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
       - When the `new_name` field is blank:
 
         ```json
@@ -1673,8 +1704,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "new_name",
-            "message": "project_categories new_name must not be blank"
+            "new_name": "project_categories new_name must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1689,8 +1719,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "new_name",
-            "message": [
+            "new_name": [
               "project_categories new_name must be a string",
               "project_categories new_name must not be null"
             ]
@@ -1707,8 +1736,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "category_name",
-            "message": "project_categories name not found"
+            "category_name": "project_categories name not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1722,8 +1750,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "attribute": "new_name",
-            "message": "project_categories new_name has been taken"
+            "new_name": "project_categories new_name has been taken"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1735,10 +1762,11 @@ Update an existing project category.
 ### Request Example
 
 - **PUT**: `{{base_url}}/project_categories/update/Mobile%20Development`
-- **Content-type**: `application/x-www-form-urlencoded`
+- **Content-Type**: `multipart/form-data`
 
 | Field    | Input Example   |
 | -------- | --------------- |
 | new_name | IOS Development |
+| image    | file            |
 
 ---
