@@ -1539,29 +1539,28 @@ Retrieve existing project categories with optional pagination and sorting.
           "total_pages": 1,
           "records": [
             {
-              "name": "Web Development",
-              "created_at": "2023-05-23T22:30:30.000Z",
-              "updated_at": "2023-05-23T22:30:30.000Z"
-            },
-            {
-              "name": "Programming",
-              "created_at": "2023-05-24T05:42:09.000Z",
-              "updated_at": "2023-05-24T05:42:09.000Z"
+              "name": "Android Development",
+              "photo_url": "static/project_category_photo/Android Development/Android Development_2023-05-26-10-30-57_Android-App-Development-2.jpg",
+              "created_at": "2023-05-26T02:30:59.000Z",
+              "updated_at": "2023-05-26T02:30:59.000Z"
             },
             {
               "name": "IOS Development",
-              "created_at": "2023-05-24T05:35:20.000Z",
-              "updated_at": "2023-05-24T05:35:20.000Z"
+              "photo_url": "static/project_category_photo/IOS Development/IOS Development_2023-05-26-10-22-00_ios-training.png",
+              "created_at": "2023-05-26T02:22:00.000Z",
+              "updated_at": "2023-05-26T02:22:00.000Z"
             },
             {
-              "name": "Android Development",
-              "created_at": "2023-05-24T05:35:13.000Z",
-              "updated_at": "2023-05-24T05:35:13.000Z"
+              "name": "Web Development",
+              "photo_url": "static/project_category_photo/Web Development/Web Development_2023-05-26-10-24-04_web-development.jpeg",
+              "created_at": "2023-05-26T02:24:06.000Z",
+              "updated_at": "2023-05-26T02:24:06.000Z"
             },
             {
-              "name": "Mobile Development",
-              "created_at": "2023-05-24T22:23:56.000Z",
-              "updated_at": "2023-05-24T22:23:56.000Z"
+              "name": "Programming",
+              "photo_url": "static/project_category_photo/Programming/Programming_2023-05-26-10-32-36_main-image.png",
+              "created_at": "2023-05-26T02:32:38.000Z",
+              "updated_at": "2023-05-26T02:32:38.000Z"
             }
           ]
         }
