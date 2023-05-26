@@ -2117,3 +2117,165 @@ Create a new project.
 | category_list    | ["Android Development", "IOS Development"]                                                |
 
 ---
+
+## Get Existing Project
+
+Retrieve existing projects based on specific query parameters.
+
+- **URL**: `/projects/create`
+- **Method**: `POST`
+
+### Query Parameters for Filtering
+
+| Parameter      | Type   | Description                                                                                     |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| page           | number | Current page number                                                                             |
+| size           | number | Number of records per page                                                                      |
+| id             | uuid   | The ID of the project to retrieve                                                               |
+| status         | string | Filter projects by status. Allowed values: `Open`, `In Progress`, `Closed`                      |
+| fee            | string | Sort projects by fee. Allowed values: `ASC` (ascending), `DESC` (descending)                    |
+| fee_from       | number | Filter projects with a fee greater than or equal to the specified value                         |
+| fee_to         | number | Filter projects with a fee less than or equal to the specified value                            |
+| category_names | string | Filter projects by category names. Accepts a single category name or an array of category names |
+| created_at     | string | Sort users by creation date (`ASC`, `DESC`)                                                     |
+| updated_at     | string | Sort users by update date (`ASC`, `DESC`)                                                       |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 200,
+      "status": "OK",
+      "data": {
+        "type": "projects",
+        "attributes": {
+          "current_page": 1,
+          "data_count_on_current_page": 1,
+          "total_data_count": 2,
+          "total_pages": 1,
+          "records": [
+            {
+              "fee": "Rp100000000",
+              "id": "e5f8db8b-8969-4abf-b48d-3c099ed28a73",
+              "title": "Tolong buatkan saya Moodle versi mobile untuk sekolah A yang bisa diakses android dan ios",
+              "status": "Open",
+              "deadline": "2023-10-01",
+              "latitude": -1.140409754100413,
+              "longitude": 116.86331762187554,
+              "created_at": "2023-05-26T02:44:36.000Z",
+              "updated_at": "2023-05-26T02:44:36.000Z",
+              "owner": {
+                "username": "root"
+              },
+              "categories": [
+                {
+                  "created_at": "2023-05-26T02:44:38.000Z",
+                  "updated_at": "2023-05-26T02:44:38.000Z",
+                  "project_category": {
+                    "name": "Android Development"
+                  }
+                },
+                {
+                  "created_at": "2023-05-26T02:44:39.000Z",
+                  "updated_at": "2023-05-26T02:44:39.000Z",
+                  "project_category": {
+                    "name": "IOS Development"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "meta": {
+        "version": "<API_VERSION>",
+        "timestamp": "<Current Timestamp>"
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+
+      - When the `page` is not number:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "page": "page must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+      - When the `size` is not number:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "size": "size must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+      - When the `status` field is invalid:
+
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "status": "status value must be either 'Open', 'In Progress', or 'Closed'"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+  - **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+
+    - When the `category_names` field is not a string:
+      ```json
+      {
+        "code": 404,
+        "status": "NOT_FOUND",
+        "errors": {
+          "category_names": "category_names not found"
+        },
+        "meta": {
+          "version": "<API_VERSION>",
+          "timestamp": "<Current Timestamp>"
+        }
+      }
+      ```
+
+### Request Example
+
+- **GET** `{{base_url}}/projects/read?page=1&size=5&status=Open&category_names=Programming&category_names=Web%20Development`
+
+---
