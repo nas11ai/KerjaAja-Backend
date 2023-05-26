@@ -1789,6 +1789,7 @@ Delete an existing project category.
 - **Success Response**
 
   - **Code**: `204 No Content`
+  - **Content-Type**: `application/json`
   - **Content**:
     ```json
     {
@@ -1807,6 +1808,7 @@ Delete an existing project category.
 
 - **Error Response**
   - **Code**: `404 Not Found`
+  - **Content-Type**: `application/json`
     - **Content**:
       ```json
       {
