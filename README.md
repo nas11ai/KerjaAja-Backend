@@ -12,7 +12,7 @@ This API is made with:
 
 ## Base URL
 
-- Development: http://localhost:3001
+- Development: https://kerjaaja-backend-production.up.railway.app
 
 # User
 
