@@ -10,7 +10,7 @@ const deleteExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "sender_username", "sender_username not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   const { id: sender_id } = user;
@@ -24,7 +24,7 @@ const deleteExistingUserRecommendation = async (req) => {
       const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+      throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
     }
 
     const { id: receiver_id } = user;
@@ -38,7 +38,7 @@ const deleteExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "user_recommendation", "user_recommendation not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   return;

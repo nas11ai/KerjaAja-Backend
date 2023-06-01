@@ -10,7 +10,7 @@ const deleteExistingProjectCategory = async (req) => {
     const err = new ErrorDetails("ProjectCategoryError", "category_name", "category_name not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   const photo_path = projectCategory.photo_path;

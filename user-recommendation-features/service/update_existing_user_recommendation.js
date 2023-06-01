@@ -10,7 +10,7 @@ const updateExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username must not be blank");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   let user = await User.findOne({ where: { username: req.query.receiver_username } });
@@ -19,7 +19,7 @@ const updateExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   const { id: receiver_id } = user;
@@ -30,7 +30,7 @@ const updateExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "sender_username", "sender_username not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   const { id: sender_id } = user;
@@ -43,14 +43,14 @@ const updateExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("UserRecommendationError", "user_recommendation", "user_recommendation not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   if (!(rating || description)) {
     const err = new ErrorDetails("UserRecommendationError", "user_recommendation", "rating or description must be available");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   if (rating) {
@@ -60,14 +60,14 @@ const updateExistingUserRecommendation = async (req) => {
       const err = new ErrorDetails("UserRecommendationError", "rating", "rating must be number");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     if (rating < 1 || rating > 5) {
       const err = new ErrorDetails("UserRecommendationError", "rating", "rating must be between 1 to 5");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     userRecommendation.rating = rating;

@@ -11,14 +11,14 @@ const getExistingUserRecommendation = async (req) => {
     const err = new ErrorDetails("OfficeError", "pagination", "page must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   if (req.query.size && isNaN(Number(req.query.size))) {
     const err = new ErrorDetails("OfficeError", "pagination", "size must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const where = {};
@@ -46,7 +46,7 @@ const getExistingUserRecommendation = async (req) => {
       const err = new ErrorDetails("UserRecommendationError", "receiver_username", "receiver_username not found");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+      throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
     }
 
     const { id: receiver_id } = user;
@@ -61,7 +61,7 @@ const getExistingUserRecommendation = async (req) => {
       const err = new ErrorDetails("UserRecommendationError", "sender_username", "sender_username not found");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+      throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
     }
 
     const { id: sender_id } = user;

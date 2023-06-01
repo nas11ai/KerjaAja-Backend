@@ -12,7 +12,7 @@ const updateExistingProject = async (req) => {
     const err = new ErrorDetails("ProjectError", "request_body", "request_body must not be blank");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const { id } = req.params;
@@ -33,7 +33,7 @@ const updateExistingProject = async (req) => {
     const err = new ErrorDetails("ProjectError", "project", "project not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   if (title) {
@@ -45,7 +45,7 @@ const updateExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "status", "status value must be between 'Open' or 'In Progress' or 'Closed'");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     project.status = status;
@@ -58,14 +58,14 @@ const updateExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "project_fee", "project_fee must be number");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     if (fee < 0) {
       const err = new ErrorDetails("ProjectError", "project_fee", "project_fee must not be less than 0");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     project.fee = fee;
@@ -78,7 +78,7 @@ const updateExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "deadline", "deadline must be within 'YYYY-MM-DD' format");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     project.deadline = deadline;
@@ -91,7 +91,7 @@ const updateExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "region_latitude", "region_latitude must be number");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     project.latitude = latitude;
@@ -104,7 +104,7 @@ const updateExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "region_longitude", "region_longitude must be number");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     project.longitude = longitude;
@@ -121,14 +121,14 @@ const updateExistingProject = async (req) => {
         const err = new ErrorDetails("ProjectError", "category_list", "category_list must be string of array");
         // TODO: ganti console ke log kalau sudah mau production
         console.error(err);
-        throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+        throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
       }
 
       if (categories.length === 0) {
         const err = new ErrorDetails("ProjectError", "category_list", "category_list must not be empty");
         // TODO: ganti console ke log kalau sudah mau production
         console.error(err);
-        throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+        throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
       }
 
       await ProjectCategoryMap.destroy({
@@ -143,7 +143,7 @@ const updateExistingProject = async (req) => {
           const err = new ErrorDetails("ProjectError", "category_list", `category_list item: ${category_name} not found`);
           // TODO: ganti console ke log kalau sudah mau production
           console.error(err);
-          throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+          throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
         }
 
         const project_id = id;

@@ -23,7 +23,7 @@ const login = async (req) => {
     const err = new ErrorDetails("LoginFormError", "username", "username is wrong");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const passwordExists = user
@@ -34,7 +34,7 @@ const login = async (req) => {
     const err = new ErrorDetails("LoginFormError", "password", "password is wrong");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const newAccessToken = jwt.sign({

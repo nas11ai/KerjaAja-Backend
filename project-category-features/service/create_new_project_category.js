@@ -11,7 +11,7 @@ const createNewProjectCategory = async (req) => {
       const err = new ErrorDetails("ProjectCategoryError", "name", "project_categories name must not be blank");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     if (typeof name !== "string") {
@@ -21,7 +21,7 @@ const createNewProjectCategory = async (req) => {
       ]);
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     const existingProjectCategory = await ProjectCategory.findOne({ where: { name } });
@@ -30,14 +30,14 @@ const createNewProjectCategory = async (req) => {
       const err = new ErrorDetails("ProjectCategoryError", "name", "project_categories name already exist");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     if (!req.file) {
       const err = new ErrorDetails("ProjectCategoryError", "photo", "photo must not be blank");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     const photo_path = req.file.path;

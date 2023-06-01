@@ -28,7 +28,7 @@ const getExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "project", "project not found");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+      throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
     }
 
     return project;
@@ -39,14 +39,14 @@ const getExistingProject = async (req) => {
     const err = new ErrorDetails("OfficeError", "pagination", "page must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   if (req.query.size && isNaN(Number(req.query.size))) {
     const err = new ErrorDetails("OfficeError", "pagination", "size must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const projectWhere = {};
@@ -59,7 +59,7 @@ const getExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "status", "status value must be between 'Open' or 'In Progress' or 'Closed'");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+      throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
     }
 
     projectWhere.status = { [Op.like]: `${req.query.status}` };
@@ -111,7 +111,7 @@ const getExistingProject = async (req) => {
       const err = new ErrorDetails("ProjectError", "category_names", "category_names not found");
       // TODO: ganti console ke log kalau sudah mau production
       console.error(err);
-      throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+      throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
     }
 
     const projectIds = projectIdsWithCategory.map((map) => map.project_id);

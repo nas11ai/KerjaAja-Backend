@@ -23,7 +23,7 @@ const deleteExistingProject = async (req) => {
     const err = new ErrorDetails("ProjectError", "project", "project not found");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+    throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
   }
 
   await project.destroy();

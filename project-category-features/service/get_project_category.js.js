@@ -10,14 +10,14 @@ const getExistingProjectCategory = async (req) => {
     const err = new ErrorDetails("OfficeError", "pagination", "page must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   if (req.query.size && isNaN(Number(req.query.size))) {
     const err = new ErrorDetails("OfficeError", "pagination", "size must be integer");
     // TODO: ganti console ke log kalau sudah mau production
     console.error(err);
-    throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+    throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
   }
 
   const where = {};

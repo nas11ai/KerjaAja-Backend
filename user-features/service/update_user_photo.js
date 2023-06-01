@@ -15,14 +15,14 @@ const updateUserPhoto = async (req) => {
       if (!user) {
         const err = new ErrorDetails("UserPhotoError", "user", "user not found");
         console.error(err); // TODO: ganti console ke log kalau sudah mau production
-        throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+        throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
       }
 
       if (req.query.delete && req.query.delete === "true") {
         if (!(user.photo_path || user.photo_url)) {
           const err = new ErrorDetails("UserPhotoError", "photo", "no photo to be deleted");
           console.error(err); // TODO: ganti console ke log kalau sudah mau production
-          throw new ErrorResponse(404, "NOT_FOUND", { [err.attribute]: err.message });
+          throw new ErrorResponse(404, "NOT_FOUND", { message: err.message });
         }
 
         const { photo_path } = user;
@@ -46,7 +46,7 @@ const updateUserPhoto = async (req) => {
         if (user.photo_path || user.photo_url) {
           const err = new ErrorDetails("UserPhotoError", "photo", "photo already exists");
           console.error(err); // TODO: ganti console ke log kalau sudah mau production
-          throw new ErrorResponse(400, "BAD_REQUEST", { [err.attribute]: err.message });
+          throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
         }
 
         user.photo_path = req.file.path;
