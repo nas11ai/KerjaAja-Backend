@@ -2122,7 +2122,7 @@ Create a new project.
 
 Retrieve existing projects based on specific query parameters.
 
-- **URL**: `/projects/create`
+- **URL**: `/projects/read`
 - **Method**: `POST`
 
 ### Query Parameters for Filtering
