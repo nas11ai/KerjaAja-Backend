@@ -66,7 +66,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "username": "username must not be blank"
+            "message": "username must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -80,7 +80,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "username": "username has been taken"
+            "message": "username has been taken"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -94,7 +94,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "fullname": "fullname must not be blank"
+            "message": "fullname must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -108,7 +108,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "role": "role must not be blank"
+            "message": "role must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -122,7 +122,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "password": "password must not be blank"
+            "message": "password must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -136,7 +136,7 @@ Register a new user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "gender": "gender must not be blank"
+            "message": "gender must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -210,7 +210,7 @@ Authenticate a user and generate access token.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "username": "username is wrong"
+            "message": "username is wrong"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -224,7 +224,7 @@ Authenticate a user and generate access token.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "password": "password is wrong"
+            "message": "password is wrong"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -320,7 +320,7 @@ Retrieve existing users based on the provided query parameters.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "page": "page must be integer"
+            "message": "page must be integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -334,7 +334,7 @@ Retrieve existing users based on the provided query parameters.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "size": "size must be integer"
+            "message": "size must be integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -406,7 +406,7 @@ Update the photo of a user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "photo": "photo already exists"
+            "message": "photo already exists"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -423,7 +423,7 @@ Update the photo of a user.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user": "user is not found"
+            "message": "user is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -437,7 +437,7 @@ Update the photo of a user.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "photo": "no photo to be deleted"
+            "message": "no photo to be deleted"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -505,11 +505,11 @@ Change the password of a user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_password": "new_password must not be blank"
+            "message": "new_password must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
-            "timestamp": "<Current Timestamp>"
+            "message": "<Current Timestamp>"
           }
         }
         ```
@@ -519,7 +519,7 @@ Change the password of a user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_password": "new_password must be string"
+            "message": "new_password must be string"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -535,7 +535,7 @@ Change the password of a user.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user": "user is not found"
+            "message": "user is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -609,7 +609,7 @@ Change the username of a user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_username": "new_username must not be blank"
+            "message": "new_username must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -623,7 +623,7 @@ Change the username of a user.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_username": "new_username must be string"
+            "message": "new_username must be string"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -640,7 +640,7 @@ Change the username of a user.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user": "user is not found"
+            "message": "user is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -711,7 +711,7 @@ Verify if the provided password matches the user's password.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "checked_password": "checked_password must not be blank"
+            "message": "checked_password must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -725,7 +725,7 @@ Verify if the provided password matches the user's password.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "checked_password": "checked_password must be string"
+            "message": "checked_password must be string"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -739,7 +739,7 @@ Verify if the provided password matches the user's password.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "checked_password": "checked_password is wrong"
+            "message": "checked_password is wrong"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -756,7 +756,7 @@ Verify if the provided password matches the user's password.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user": "user is not found"
+            "message": "user is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -827,7 +827,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "sender_username": "sender_username must not be blank"
+            "message": "sender_username must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -841,7 +841,7 @@ Create a new user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "sender_username": "sender_username is not found"
+            "message": "sender_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -855,7 +855,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "receiver_username": "receiver_username must not be blank"
+            "message": "receiver_username must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -869,7 +869,7 @@ Create a new user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "receiver_username": "receiver_username is not found"
+            "message": "receiver_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -883,7 +883,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "user_recommendations": "receiver_username must not be the same as sender_username"
+            "message": "receiver_username must not be the same as sender_username"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -897,7 +897,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating must not be blank"
+            "message": "rating must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -911,7 +911,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating must be number"
+            "message": "rating must be number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -925,7 +925,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating must be between 1 to 5"
+            "message": "rating must be between 1 to 5"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -939,7 +939,7 @@ Create a new user recommendation.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating between { sender_username: <sender_username> } to { receiver_username: <receiver_username> } already exists"
+            "message": "rating between { sender_username: <sender_username> } to { receiver_username: <receiver_username> } already exists"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -956,7 +956,7 @@ Create a new user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "sender_username": "sender_username is not found"
+            "message": "sender_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -970,7 +970,7 @@ Create a new user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "receiver_username": "receiver_username is not found"
+            "messsage": "receiver_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1037,7 +1037,7 @@ None.
           "total_pages": 10,
           "records": [
             {
-              "rating": 4,
+              "message": 4,
               "description": "Great user recommendation",
               "created_at": "2023-05-22T10:30:00.000Z",
               "updated_at": "2023-05-22T10:30:00.000Z",
@@ -1069,7 +1069,7 @@ None.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "page": "page must be number"
+            "message": "page must be number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1083,7 +1083,7 @@ None.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "size": "size must be number"
+            "message": "size must be number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1099,7 +1099,7 @@ None.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "receiver_username": "receiver_username is not found"
+            "message": "receiver_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1113,7 +1113,7 @@ None.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "sender_username": "sender_username is not found"
+            "message": "sender_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1190,7 +1190,7 @@ The request body should be a JSON object with the following properties:
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "receiver_username": "receiver_username must not be blank"
+            "message": "receiver_username must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1204,7 +1204,7 @@ The request body should be a JSON object with the following properties:
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "user_recommendation": "rating and description must be available"
+            "message": "rating and description must be available"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1218,7 +1218,7 @@ The request body should be a JSON object with the following properties:
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating must be number"
+            "message": "rating must be number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1232,7 +1232,7 @@ The request body should be a JSON object with the following properties:
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "rating": "rating must be between 1 to 5"
+            "message": "rating must be between 1 to 5"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1249,7 +1249,7 @@ The request body should be a JSON object with the following properties:
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "receiver_username": "receiver_username is not found"
+            "message": "receiver_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1263,7 +1263,7 @@ The request body should be a JSON object with the following properties:
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "sender_username": "sender_username is not found"
+            "message": "sender_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1277,7 +1277,7 @@ The request body should be a JSON object with the following properties:
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user_recommendation": "user_recommendation is not found"
+            "message": "user_recommendation is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1344,7 +1344,7 @@ Delete an existing user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "sender_username": "sender_username is not found"
+            "message": "sender_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1358,7 +1358,7 @@ Delete an existing user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "receiver_username": "receiver_username is not found"
+            "message": "receiver_username is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1372,7 +1372,7 @@ Delete an existing user recommendation.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "user_recommendation": "user_recommendation is not found"
+            "message": "user_recommendation is not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1439,7 +1439,7 @@ Create a new project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "photo": "photo must not be blank"
+            "message": "photo must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1453,7 +1453,7 @@ Create a new project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "name": "project_categories name must not be blank"
+            "message": "project_categories name must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1467,7 +1467,7 @@ Create a new project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "name": "project_categories name must be a string, project_categories name must not be null"
+            "message": "project_categories name must be a string, project_categories name must not be null"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1481,7 +1481,7 @@ Create a new project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "name": "project_categories name already exist"
+            "message": "project_categories name already exist"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1585,7 +1585,7 @@ Retrieve existing project categories with optional pagination and sorting.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "pagination": "page must be an integer"
+            "message": "page must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1600,7 +1600,7 @@ Retrieve existing project categories with optional pagination and sorting.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "pagination": "size must be an integer"
+            "message": "size must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1672,7 +1672,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "request_body": "project_categories request_body must not be blank"
+            "message": "project_categories request_body must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1688,7 +1688,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "image": "photo must not be blank"
+            "message": "photo must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1704,7 +1704,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_name": "project_categories new_name must not be blank"
+            "message": "project_categories new_name must not be blank"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1719,7 +1719,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_name": [
+            "message": [
               "project_categories new_name must be a string",
               "project_categories new_name must not be null"
             ]
@@ -1736,7 +1736,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "category_name": "project_categories name not found"
+            "message": "project_categories name not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1750,7 +1750,7 @@ Update an existing project category.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "new_name": "project_categories new_name has been taken"
+            "message": "project_categories new_name has been taken"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1815,7 +1815,7 @@ Delete an existing project category.
         "code": 404,
         "status": "NOT_FOUND",
         "errors": {
-          "category_name": "category_name not found"
+          "message": "category_name not found"
         },
         "meta": {
           "version": "<API_VERSION>",
@@ -1888,7 +1888,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "title": "title must not be empty"
+            "message": "title must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1902,7 +1902,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "status": "status must not be empty"
+            "message": "status must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1916,7 +1916,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "status": "status value must be between 'Open' or 'In Progress' or 'Closed'"
+            "message": "status value must be between 'Open' or 'In Progress' or 'Closed'"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1930,7 +1930,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "project_fee": "project_fee must be a number"
+            "message": "project_fee must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1944,7 +1944,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "project_fee": "project_fee must not be less than 0"
+            "message": "project_fee must not be less than 0"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1958,7 +1958,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "deadline": "deadline must not be empty"
+            "message": "deadline must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1972,7 +1972,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "deadline": "deadline must be within 'YYYY-MM-DD' format"
+            "message": "deadline must be within 'YYYY-MM-DD' format"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -1986,7 +1986,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "category_list": "category_list must be a string of array"
+            "message": "category_list must be a string of array"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2000,7 +2000,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "category_list": "category_list must not be empty"
+            "message": "category_list must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2014,7 +2014,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_latitude": "region_latitude must not be empty"
+            "message": "region_latitude must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2028,7 +2028,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_latitude": "region_latitude must be a number"
+            "message": "region_latitude must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2043,7 +2043,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_longitude": "region_longitude must not be empty"
+            "message": "region_longitude must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2059,7 +2059,7 @@ Create a new project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_longitude": "region_longitude must be a number"
+            "message": "region_longitude must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2077,7 +2077,7 @@ Create a new project.
         "code": 404,
         "status": "NOT_FOUND",
         "errors": {
-          "owner_username": "owner_username not found"
+          "message": "owner_username not found"
         },
         "meta": {
           "version": "<API_VERSION>",
@@ -2091,7 +2091,7 @@ Create a new project.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "category_list": "category_list item: <category_name> not found"
+            "message": "category_list item: <category_name> not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2213,7 +2213,7 @@ Retrieve existing projects based on specific query parameters.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "page": "page must be an integer"
+            "message": "page must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2229,7 +2229,7 @@ Retrieve existing projects based on specific query parameters.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "size": "size must be an integer"
+            "messasge": "size must be an integer"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2245,7 +2245,7 @@ Retrieve existing projects based on specific query parameters.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "status": "status value must be either 'Open', 'In Progress', or 'Closed'"
+            "message": "status value must be either 'Open', 'In Progress', or 'Closed'"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2265,7 +2265,7 @@ Retrieve existing projects based on specific query parameters.
         "code": 404,
         "status": "NOT_FOUND",
         "errors": {
-          "category_names": "category_names not found"
+          "message": "category_names not found"
         },
         "meta": {
           "version": "<API_VERSION>",
@@ -2341,7 +2341,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "title": "title must not be empty"
+            "message": "title must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2355,7 +2355,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "status": "status must not be empty"
+            "message": "status must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2369,7 +2369,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "status": "status value must be between 'Open' or 'In Progress' or 'Closed'"
+            "message": "status value must be between 'Open' or 'In Progress' or 'Closed'"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2383,7 +2383,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "project_fee": "project_fee must be a number"
+            "message": "project_fee must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2397,7 +2397,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "project_fee": "project_fee must not be less than 0"
+            "message": "project_fee must not be less than 0"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2411,7 +2411,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "deadline": "deadline must not be empty"
+            "message": "deadline must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2425,7 +2425,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "deadline": "deadline must be within 'YYYY-MM-DD' format"
+            "message": "deadline must be within 'YYYY-MM-DD' format"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2439,7 +2439,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "category_list": "category_list must be a string of array"
+            "message": "category_list must be a string of array"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2453,7 +2453,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "category_list": "category_list must not be empty"
+            "message": "category_list must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2467,7 +2467,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_latitude": "region_latitude must not be empty"
+            "message": "region_latitude must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2481,7 +2481,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_latitude": "region_latitude must be a number"
+            "message": "region_latitude must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2496,7 +2496,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_longitude": "region_longitude must not be empty"
+            "message": "region_longitude must not be empty"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2512,7 +2512,7 @@ Update an existing project.
           "code": 400,
           "status": "BAD_REQUEST",
           "errors": {
-            "region_longitude": "region_longitude must be a number"
+            "message": "region_longitude must be a number"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2530,7 +2530,7 @@ Update an existing project.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "project": "project not found"
+            "message": "project not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2544,7 +2544,7 @@ Update an existing project.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "owner_username": "owner_username not found"
+            "message": "owner_username not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2558,7 +2558,7 @@ Update an existing project.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "category_list": "category_list item: <category_name> not found"
+            "message": "category_list item: <category_name> not found"
           },
           "meta": {
             "version": "<API_VERSION>",
@@ -2629,7 +2629,7 @@ Delete an existing project.
           "code": 404,
           "status": "NOT_FOUND",
           "errors": {
-            "project": "project not found"
+            "message": "project not found"
           },
           "meta": {
             "version": "<API_VERSION>",
