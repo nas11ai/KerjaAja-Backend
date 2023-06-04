@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-const io = require("socket.io")(server, { cors: { origin: " * ", }, });
+const io = require("socket.io")(server, { cors: { origin: " * ", },});
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const path = require('path');
@@ -82,9 +82,6 @@ app.use('/projects/read', getExistingProjectRouter);
 app.use('/projects/update', updateExistingProjectRouter);
 app.use('/projects/delete', deleteExistingProjectRouter);
 
-app.use('/chat-feature/getUnreadMessage', getUnreadMessagesRouter);
-app.use('/chat-feature/readMessages', readMessagesRouter);
-app.use('/chat-feature/deleteMessages', deleteMessagesRouter);
 app.use('/chat-feature', connecttoChatRouter(io));
 
 async function main() {

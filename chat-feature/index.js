@@ -5,84 +5,108 @@ const redis = require("redis");
 const redisClient = redis.createClient(process.env.REDIS_URL);
 
 module.exports = (io) => {
-router.get('/', (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", " * ");
-  const socket = io.of('/chat-feature');
-
+  router.use('/', (req, res, next) => {
+    res.send("Chat is running");
+    next();
+  });
+  
+  const chatIo = io.of('/chat-feature');
   var users = [];
-
-  socket.on('connection', (socket) => {
+  
+  chatIo.on('connection', (socket) => {
     console.log('User connected', socket.id);
+    
+    socket.on('userConnected', (userId) => {
+      const socketId = socket.id;
+      users[userId] = socketId;
 
-    socket.on('userConnected', (username) => {
-      users[username] = socket.id;
+      chatIo.emit('userConnected', userId);
+    });
+  
+    socket.on('getMessages', ({ receiver, sender }, callback) => {
 
-      socket.emit("userConnected", username);
 
-      socket.on('getMessages', ({
-        sender,
-        receiver
-      }, callback) => {
-        // Ambil pesan dari Redis berdasarkan sender dan receiver
-        redisClient.lrange(`sender_${sender}:${receiver}:messages`, 0, -1, (err, messages) => {
+      redisClient.lrange(`sender_${sender}:${receiver}:messages`, 0, -1, (err, senderToReceiverMessages) => {
+        if (err) {
+          console.error(err);
+          return callback([]);
+        }
+
+        redisClient.lrange(`sender_${receiver}:${sender}:messages`, 0, -1, (err, receiverToSenderMessages) => {
           if (err) {
             console.error(err);
             return callback([]);
           }
 
-          // Parse pesan dari JSON strings ke objects
-          const parsedMessages = messages.map((message) => JSON.parse(message));
-          callback(parsedMessages);
-        });
-      });
+          const SenderToReceiver = senderToReceiverMessages.map((message) => JSON.parse(message));
+          const ReceiverToSender = receiverToSenderMessages.map((message) => JSON.parse(message));
+          const allMessages = SenderToReceiver.concat(ReceiverToSender);
+          const sortedMessages = allMessages.sort((a, b) => a.timestamp - b.timestamp);
+          callback(sortedMessages);
 
-      socket.on("sendMessage", (data) => {
-        //kirim pesan ke receiver
-        var socketId = users[data.receiver];
-
-        socket.to(socketId).emit("newMessage", data);
-        const {
-          sender,
-          receiver,
-          message
-        } = data;
-
-        console.log('sender:' + sender + 'receiver:' + receiver + ' message: ' + message);
-
-        const messageData = {
-          sender,
-          message,
-          timestamp: Date.now()
-        };
-
-        // Simpan pesan ke Redis
-        redisClient.rpush(`sender_${sender}:${receiver}:messages`, JSON.stringify(messageData), (err) => {
-          if (err) {
-            console.error(err);
-          }
-          console.log('berhasil diinput ke redis')
-        });
-
-        // Menambahkan/increment unread count
-        redisClient.hincrby(`sender_:${sender}:unread`, `${receiver}:unread_count`, 1, (err) => {
-          if (err) {
-            console.error('Gagal menambahkan unread count:', err);
-            return res.status(500).json({
-              error: 'Gagal menambahkan unread count'
-            });
-          }
         });
       });
     });
+  
+    socket.on("sendMessage", (data) => {
+      const { sender, receiver, message } = data;
+      const messageData = {
+        sender,
+        message,
+        timestamp: Date.now()
+      };
+      
+      if (users.hasOwnProperty(receiver)) {
+        const socketId = users[receiver];
+        chatIo.to(socketId).emit("newMessage", data);
+        
+      }
 
-    req.socket.on('disconnect', () => {
-      console.log('user disconnected');
+      redisClient.rpush(`sender_${sender}:${receiver}:messages`, JSON.stringify(messageData), (err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
+  
+      redisClient.hincrby(`sender_:${sender}:unread`, `${receiver}:unread_count`, 1, (err) => {
+        if (err) {
+          console.error('Gagal menambahkan unread count:', err);
+        }
+      });
     });
+  
+    socket.on('messageRead', (data) => {
+      const { sender, receiver } = data;
+      redisClient.hset(`sender:${sender}:unread`, `${receiver}:unread_count`, 0, (err) => {
+        if (err) {
+          console.error('Gagal menghapus unread :', err);
+        }
+        const channel = `sender:${receiver}:receiver`;
+        chatIo.to(channel).emit('messageRead', { sender, receiver });
+      });
+    });
+  
+    socket.on('getUnreadMessages', (data) => {
+      const { sender, receiver } = data;
+      redisClient.hget(`sender_:${sender}:unread`, `${receiver}:unread_count`, (err, count) => {
+        if (err) {
+          console.error('Gagal mengambil jumlah pesan yang belum dibaca:', err);
+        }
+        const channel = `sender:${sender}:receiver`;
+        io.to(channel).emit('unreadCount', { count });
+      });
+    });
+  
+    socket.on('disconnected', () => {
+      
+      const userId = Object.keys(users).find(key => users[key] === socket.id);
 
+      if (userId) {
+        delete users[userId];
+      }
+    });
   });
 
-  res.send("Chat is running");
-
-});
+ 
 return router;
 };
