@@ -18,7 +18,12 @@ module.exports = (io) => {
     
     socket.on('userConnected', (userId) => {
       const socketId = socket.id;
-      users[userId] = socketId;
+
+      redisClient.hmset("online_users", userId, socketId, (err, reply) => {
+        if (err) {
+          console.error('Gagal menyimpan data user online:', err);
+        }
+      });
 
       chatIo.emit('userConnected', userId);
     });
@@ -101,9 +106,11 @@ module.exports = (io) => {
       
       const userId = Object.keys(users).find(key => users[key] === socket.id);
 
-      if (userId) {
-        delete users[userId];
-      }
+      redisClient.hdel("online_users", userId, (err, reply) => {
+        if (err) {
+          console.error('Gagal menghapus data pengguna online:', err);
+        }
+      });
     });
   });
 
