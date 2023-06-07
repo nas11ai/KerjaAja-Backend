@@ -22,6 +22,32 @@ const getExistingProject = async (req) => {
         "created_at",
         "updated_at",
       ],
+      include: [
+        {
+          model: User,
+          as: "owner",
+          attributes: [
+            "username",
+            "photo_url",
+          ],
+        },
+        {
+          model: ProjectCategoryMap,
+          as: "categories",
+          attributes: [
+            'created_at',
+            'updated_at',
+          ],
+          include: [
+            {
+              model: ProjectCategory,
+              foreignKey: "project_category_id",
+              as: "project_category",
+              attributes: ["name"],
+            },
+          ],
+        },
+      ],
     });
 
     if (!project) {
@@ -135,7 +161,10 @@ const getExistingProject = async (req) => {
       {
         model: User,
         as: "owner",
-        attributes: ["username"],
+        attributes: [
+          "username",
+          "photo_url",
+        ],
       },
       {
         model: ProjectCategoryMap,
