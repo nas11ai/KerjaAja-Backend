@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const server = require('http').createServer(app);
+const io = require("socket.io")(server, { cors: { origin: " * ", },});
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const path = require('path');
@@ -35,6 +37,13 @@ const {
   deleteExistingProjectRouter,
 } = require("./project-features/controller");
 
+const {
+  connecttoChatRouter,
+  getUnreadMessagesRouter,
+  readMessagesRouter,
+  deleteMessagesRouter,
+} = require("./chat-feature/controller");
+
 const { PORT } = require("./utilities/config");
 const { connectToDatabase } = require("./utilities/db");
 const { errorHandler } = require('./middlewares');
@@ -42,6 +51,7 @@ const { errorHandler } = require('./middlewares');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("KerjaAja API is running 🥳");
@@ -72,11 +82,13 @@ app.use('/projects/read', getExistingProjectRouter);
 app.use('/projects/update', updateExistingProjectRouter);
 app.use('/projects/delete', deleteExistingProjectRouter);
 
-const main = async () => {
+app.use('/chat-feature', connecttoChatRouter(io));
+
+async function main() {
   await connectToDatabase();
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-  })
+  });
 }
 
 main();

@@ -14,4 +14,5 @@ module.exports = {
   TOKEN_ALGORITHM: process.env.TOKEN_ALGORITHM,
   TOKEN_ISSUER: process.env.TOKEN_ISSUER,
   TOKEN_AUDIENCE: process.env.TOKEN_AUDIENCE,
+  REDIS_URL: process.env.REDIS_URL
 };
