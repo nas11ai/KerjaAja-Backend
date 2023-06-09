@@ -2641,3 +2641,84 @@ Delete an existing project.
 ### Request Example
 
 - **DELETE** `{{base_url}}/projects/delete/c9f43b1-cbfb-4631-9bf2-1ffc19010bd7`
+
+# Chat API
+
+## Endpoint 
+`{{base_url}}/chat-feature`
+
+## Usage
+
+How to use:
+
+1. **userConnected**: Ketika user pertama kali connect ke Socket.io, dapat digunakan untuk menandai koneksi pertama pengguna.
+  
+    Event di sisi Server:
+    ```javascript
+    socket.on('userConnected', (userId) => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('userConnected', userId);
+    ```
+
+2. **getMessages**: Mengambil pesan antara pengirim dan penerima yang telah disimpan dalam Redis.
+
+    Event di sisi Server:
+    ```javascript
+    socket.on('getMessages', ({ receiver, sender }, callback) => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('getMessages', { receiver, sender }, (messages) => {
+      // Manipulasi pesan yang diterima
+    });
+    ```
+
+3. **sendMessage**: Mengirim pesan dari pengirim ke penerima dan menyimpannya di Redis.
+
+    Event di sisi Server:
+    ```javascript
+    socket.on('sendMessage', (data) => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('sendMessage', { sender, receiver, message });
+    ```
+
+4. **messageRead**: messageRead: Memberi tahu server bahwa pengguna telah membaca pesan.
+
+    Event di sisi Server:
+    ```javascript
+    socket.on('messageRead', (data) => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('messageRead', { sender, receiver });
+    ```
+
+5. **getUnreadMessages**: Mendapatkan jumlah pesan yang belum dibaca oleh pengguna.
+
+    Event di sisi Server:
+    ```javascript
+    socket.on('getUnreadMessages', (data) => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('getUnreadMessages', { sender, receiver });
+    ```
+
+6. **disconected**: disconnected: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
+
+    Event di sisi Server:
+    ```javascript
+    socket.on('disconnected', () => { ... })
+    ```
+    Contoh penggunaan:
+    ```javascript
+    socket.emit('disconnected');
+    ```
+
+
+
+
