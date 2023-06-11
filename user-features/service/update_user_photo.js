@@ -43,10 +43,8 @@ const updateUserPhoto = async (req) => {
       }
 
       if (req.file) {
-        if (user.photo_path || user.photo_url) {
-          const err = new ErrorDetails("UserPhotoError", "photo", "photo already exists");
-          console.error(err); // TODO: ganti console ke log kalau sudah mau production
-          throw new ErrorResponse(400, "BAD_REQUEST", { message: err.message });
+        if (user.photo_path) {
+          await fs.unlink(user.photo_path);
         }
 
         user.photo_path = req.file.path;
