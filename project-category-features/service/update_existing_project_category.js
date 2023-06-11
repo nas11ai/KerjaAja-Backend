@@ -56,7 +56,7 @@ const updateExistingProjectCategory = async (req) => {
       }
 
       updatedProjectCategory.photo_path = req.file.path;
-      updatedProjectCategory.photo_url = `static/project_category_photo/${new_name}/${req.file.filename}`;
+      updatedProjectCategory.photo_url = `static/project_category_photo/${new_name ?? req.params.category_name}/${req.file.filename}`;
     }
 
     await updatedProjectCategory.save();
