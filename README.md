@@ -13,6 +13,7 @@ This API is made with:
 ## Base URL
 
 - Development: https://kerjaaja-backend-production.up.railway.app
+- Production: https://kerja-aja.app
 
 # User
 
