@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-const io = require("socket.io")(server, { cors: { origin: " * ", },});
+const io = require("socket.io")(server, { cors: { origin: " * ", }, });
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const path = require('path');
@@ -33,6 +33,7 @@ const {
 const {
   createNewProjectRouter,
   getExistingProjectRouter,
+  getUserProjectHistoryRouter,
   updateExistingProjectRouter,
   deleteExistingProjectRouter,
 } = require("./project-features/controller");
@@ -79,6 +80,7 @@ app.use('/project_categories/delete', deleteExistingProjectCategoryRouter);
 
 app.use('/projects/create', createNewProjectRouter);
 app.use('/projects/read', getExistingProjectRouter);
+app.use('/projects/read/history', getUserProjectHistoryRouter);
 app.use('/projects/update', updateExistingProjectRouter);
 app.use('/projects/delete', deleteExistingProjectRouter);
 

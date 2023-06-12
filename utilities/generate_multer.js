@@ -51,7 +51,7 @@ const generateMulter = (assetType) => {
       }
     },
     limits: {
-      fileSize: 10 * 1024 * 1024, // set max file size to 10MB
+      fileSize: 1 * 1024 * 1024, // set max file size to 1MB
     }
   });
 }

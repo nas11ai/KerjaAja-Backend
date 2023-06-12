@@ -2642,9 +2642,166 @@ Delete an existing project.
 
 - **DELETE** `{{base_url}}/projects/delete/c9f43b1-cbfb-4631-9bf2-1ffc19010bd7`
 
+---
+
+## Get Existing Projects by Username
+
+Retrieve existing projects by username.
+
+- **URL**: `/projects/read/history/:username`
+- **Method**: `GET`
+
+### Request Parameters
+
+| Parameter | Type   | Description                       |
+| --------- | ------ | --------------------------------- |
+| username  | string | The username of the project owner |
+
+### Query Parameters
+
+| Parameter | Type   | Description                      |
+| --------- | ------ | -------------------------------- |
+| page      | number | _(optional)_ The page number     |
+| size      | number | _(optional)_ The number of items |
+
+### Response
+
+- **Success Response**
+
+  - **Code**: `200 OK`
+  - **Content-type**: `application/json`
+  - **Content**:
+    ```json
+    {
+      "code": 200,
+      "status": "OK",
+      "data": {
+        "type": "projects",
+        "attributes": {
+          "current_page": 1,
+          "data_count_on_current_page": 5,
+          "total_data_count": 10,
+          "total_pages": 2,
+          "records": [
+            {
+              "id": "123456789",
+              "title": "Project 1",
+              "status": "Open",
+              "fee": 1000,
+              "deadline": "2023-06-01",
+              "latitude": 1.234567,
+              "longitude": 2.345678,
+              "created_at": "2023-05-20T12:00:00Z",
+              "updated_at": "2023-05-21T15:30:00Z",
+              "owner": {
+                "username": "user1",
+                "photo_url": "https://example.com/user1.jpg"
+              },
+              "categories": [
+                {
+                  "created_at": "2023-05-20T12:00:00Z",
+                  "updated_at": "2023-05-21T15:30:00Z",
+                  "project_category": {
+                    "name": "Category 1"
+                  }
+                },
+                {
+                  "created_at": "2023-05-20T12:00:00Z",
+                  "updated_at": "2023-05-21T15:30:00Z",
+                  "project_category": {
+                    "name": "Category 2"
+                  }
+                }
+              ]
+            },
+            ...
+          ]
+        },
+        "meta": {
+          "version": "API_VERSION",
+          "timestamp": "Current Timestamp"
+        }
+      }
+    }
+    ```
+
+- **Error Response**
+
+  - **Code**: `400 Bad Request`
+  - **Content-type**: `application/json`
+
+    - **Content**:
+      - When `page` is not integer:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "message": "page must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `size` is not integer:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "message": "size must be an integer"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+      - When `username` is empty:
+        ```json
+        {
+          "code": 400,
+          "status": "BAD_REQUEST",
+          "errors": {
+            "message": "owner_username must not be empty"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+  - **Code**: `404 Not Found`
+  - **Content-type**: `application/json`
+    - **Content**:
+      - When `owner_username` is not found:
+        ```json
+        {
+          "code": 404,
+          "status": "NOT_FOUND",
+          "errors": {
+            "message": "owner_username not found"
+          },
+          "meta": {
+            "version": "<API_VERSION>",
+            "timestamp": "<Current Timestamp>"
+          }
+        }
+        ```
+
+### Request Example
+
+- **GET** `{{base_url}}/projects/read/history/root`
+
+---
+
 # Chat API
 
-## Endpoint 
+## Endpoint
+
 `{{base_url}}/chat-feature`
 
 ## Usage
@@ -2652,73 +2809,87 @@ Delete an existing project.
 How to use:
 
 1. **userConnected**: Ketika user pertama kali connect ke Socket.io, dapat digunakan untuk menandai koneksi pertama pengguna.
-  
-    Event di sisi Server:
-    ```javascript
-    socket.on('userConnected', (userId) => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('userConnected', userId);
-    ```
+
+   Event di sisi Server:
+
+   ```javascript
+   socket.on('userConnected', (userId) => { ... })
+   ```
+
+   Contoh penggunaan:
+
+   ```javascript
+   socket.emit("userConnected", userId);
+   ```
 
 2. **getMessages**: Mengambil pesan antara pengirim dan penerima yang telah disimpan dalam Redis.
 
-    Event di sisi Server:
-    ```javascript
-    socket.on('getMessages', ({ receiver, sender }, callback) => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('getMessages', { receiver, sender }, (messages) => {
-      // Manipulasi pesan yang diterima
-    });
-    ```
+   Event di sisi Server:
+
+   ```javascript
+   socket.on('getMessages', ({ receiver, sender }, callback) => { ... })
+   ```
+
+   Contoh penggunaan:
+
+   ```javascript
+   socket.emit("getMessages", { receiver, sender }, (messages) => {
+     // Manipulasi pesan yang diterima
+   });
+   ```
 
 3. **sendMessage**: Mengirim pesan dari pengirim ke penerima dan menyimpannya di Redis.
 
-    Event di sisi Server:
-    ```javascript
-    socket.on('sendMessage', (data) => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('sendMessage', { sender, receiver, message });
-    ```
+   Event di sisi Server:
+
+   ```javascript
+   socket.on('sendMessage', (data) => { ... })
+   ```
+
+   Contoh penggunaan:
+
+   ```javascript
+   socket.emit("sendMessage", { sender, receiver, message });
+   ```
 
 4. **messageRead**: messageRead: Memberi tahu server bahwa pengguna telah membaca pesan.
 
-    Event di sisi Server:
-    ```javascript
-    socket.on('messageRead', (data) => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('messageRead', { sender, receiver });
-    ```
+   Event di sisi Server:
+
+   ```javascript
+   socket.on('messageRead', (data) => { ... })
+   ```
+
+   Contoh penggunaan:
+
+   ```javascript
+   socket.emit("messageRead", { sender, receiver });
+   ```
 
 5. **getUnreadMessages**: Mendapatkan jumlah pesan yang belum dibaca oleh pengguna.
 
-    Event di sisi Server:
-    ```javascript
-    socket.on('getUnreadMessages', (data) => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('getUnreadMessages', { sender, receiver });
-    ```
+   Event di sisi Server:
+
+   ```javascript
+   socket.on('getUnreadMessages', (data) => { ... })
+   ```
+
+   Contoh penggunaan:
+
+   ```javascript
+   socket.emit("getUnreadMessages", { sender, receiver });
+   ```
 
 6. **disconected**: disconnected: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
 
-    Event di sisi Server:
-    ```javascript
-    socket.on('disconnected', () => { ... })
-    ```
-    Contoh penggunaan:
-    ```javascript
-    socket.emit('disconnected');
-    ```
+   Event di sisi Server:
 
+   ```javascript
+   socket.on('disconnected', () => { ... })
+   ```
 
+   Contoh penggunaan:
 
-
+   ```javascript
+   socket.emit("disconnected");
+   ```
