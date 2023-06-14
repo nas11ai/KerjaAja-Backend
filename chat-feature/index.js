@@ -58,6 +58,7 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", (data) => {
+      console.log("sendMessage:", data);
       const {
         sender,
         receiver,
