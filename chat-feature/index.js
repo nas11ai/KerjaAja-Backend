@@ -58,28 +58,28 @@ module.exports = (io) => {
 
     socket.on("sendMessage", (data) => {
       console.log("sendMessage:", data);
-      const { sender, receiver, message } = data;
+      // const { sender, receiver, message } = data;
       const messageData = {
-        sender,
-        message,
+        sender: data.sender,
+        message: data.message,
         timestamp: Date.now(),
       };
 
-      if (users.hasOwnProperty(receiver)) {
-        const socketId = users[receiver];
+      if (users.hasOwnProperty(data.receiver)) {
+        const socketId = users[data.receiver];
         chatIo.to(socketId).emit("newMessage", data);
 
       }
 
-      console.log("messageData:", sender, receiver, message);
+      console.log("messageData:", messageData);
 
-      redisClient.rpush(`sender_${sender}:${receiver}:messages`, JSON.stringify(messageData), (err) => {
+      redisClient.rpush(`sender_${data.sender}:${data.receiver}:messages`, JSON.stringify(messageData), (err) => {
         if (err) {
           console.error(err);
         }
       });
 
-      redisClient.hincrby(`sender_:${sender}:unread`, `${receiver}:unread_count`, 1, (err) => {
+      redisClient.hincrby(`sender_:${data.sender}:unread`, `${data.receiver}:unread_count`, 1, (err) => {
         if (err) {
           console.error('Gagal menambahkan unread count:', err);
         }
