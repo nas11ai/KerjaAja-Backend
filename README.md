@@ -2881,16 +2881,16 @@ How to use:
    socket.emit("getUnreadMessages", { sender, receiver });
    ```
 
-6. **disconected**: disconnected: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
+6. **disconect**: disconnect: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
 
    Event di sisi Server:
 
    ```javascript
-   socket.on('disconnected', () => { ... })
+   socket.on('disconnect', () => { ... })
    ```
 
    Contoh penggunaan:
 
    ```javascript
-   socket.emit("disconnected");
+   socket.emit("disconnect");
    ```

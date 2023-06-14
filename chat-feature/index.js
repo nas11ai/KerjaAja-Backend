@@ -29,10 +29,8 @@ module.exports = (io) => {
       chatIo.emit('userConnected', userId);
     });
 
-    socket.on('getMessages', ({
-      receiver,
-      sender
-    }, callback) => {
+    socket.on('getMessages', (data, callback) => {
+      const { receiver, sender } = JSON.parse(data);
       console.log("getMessages", receiver, sender);
       redisClient.lrange(`sender_${sender}:${receiver}:messages`, 0, -1, (err, senderToReceiverMessages) => {
         if (err) {
@@ -91,7 +89,7 @@ module.exports = (io) => {
       const {
         sender,
         receiver
-      } = data;
+      } = JSON.parse(data);
       redisClient.hset(`sender:${sender}:unread`, `${receiver}:unread_count`, 0, (err) => {
         if (err) {
           console.error('Gagal menghapus unread :', err);
@@ -109,7 +107,7 @@ module.exports = (io) => {
       const {
         sender,
         receiver
-      } = data;
+      } = JSON.parse(data);
 
       redisClient.hget(`sender_:${sender}:unread`, `${receiver}:unread_count`, (err, count) => {
         if (err) {
