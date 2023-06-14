@@ -2133,6 +2133,7 @@ Retrieve existing projects based on specific query parameters.
 | page           | number | Current page number                                                                             |
 | size           | number | Number of records per page                                                                      |
 | id             | uuid   | The ID of the project to retrieve                                                               |
+| title          | string | Filter projects by title.                                                                       |
 | status         | string | Filter projects by status. Allowed values: `Open`, `In Progress`, `Closed`                      |
 | fee            | string | Sort projects by fee. Allowed values: `ASC` (ascending), `DESC` (descending)                    |
 | fee_from       | number | Filter projects with a fee greater than or equal to the specified value                         |
