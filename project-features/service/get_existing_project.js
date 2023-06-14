@@ -79,6 +79,11 @@ const getExistingProject = async (req) => {
 
   const projectOrder = [];
 
+  // query project title
+  if (req.query.title) {
+    projectWhere.title = { [Op.substring]: `${req.query.title}` };
+  }
+
   // query project status
   if (req.query.status) {
     if (!(req.query.status === "Open" || req.query.status === "In Progress" || req.query.status === "Closed")) {

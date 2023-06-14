@@ -2133,6 +2133,7 @@ Retrieve existing projects based on specific query parameters.
 | page           | number | Current page number                                                                             |
 | size           | number | Number of records per page                                                                      |
 | id             | uuid   | The ID of the project to retrieve                                                               |
+| title          | string | Filter projects by title.                                                                       |
 | status         | string | Filter projects by status. Allowed values: `Open`, `In Progress`, `Closed`                      |
 | fee            | string | Sort projects by fee. Allowed values: `ASC` (ascending), `DESC` (descending)                    |
 | fee_from       | number | Filter projects with a fee greater than or equal to the specified value                         |
@@ -2881,16 +2882,16 @@ How to use:
    socket.emit("getUnreadMessages", { sender, receiver });
    ```
 
-6. **disconected**: disconnected: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
+6. **disconect**: disconnect: Ketika pengguna terputus dari Socket.io, event ini akan dipicu untuk menghapus data pengguna online.
 
    Event di sisi Server:
 
    ```javascript
-   socket.on('disconnected', () => { ... })
+   socket.on('disconnect', () => { ... })
    ```
 
    Contoh penggunaan:
 
    ```javascript
-   socket.emit("disconnected");
+   socket.emit("disconnect");
    ```
