@@ -33,8 +33,7 @@ module.exports = (io) => {
       receiver,
       sender
     }, callback) => {
-
-
+      console.log("getMessages", receiver, sender);
       redisClient.lrange(`sender_${sender}:${receiver}:messages`, 0, -1, (err, senderToReceiverMessages) => {
         if (err) {
           console.error(err);
@@ -59,15 +58,11 @@ module.exports = (io) => {
 
     socket.on("sendMessage", (data) => {
       console.log("sendMessage:", data);
-      const {
-        sender,
-        receiver,
-        message
-      } = data;
+      const { sender, receiver, message } = data;
       const messageData = {
         sender,
         message,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       if (users.hasOwnProperty(receiver)) {
@@ -75,6 +70,8 @@ module.exports = (io) => {
         chatIo.to(socketId).emit("newMessage", data);
 
       }
+
+      console.log("messageData:", sender, receiver, message);
 
       redisClient.rpush(`sender_${sender}:${receiver}:messages`, JSON.stringify(messageData), (err) => {
         if (err) {
